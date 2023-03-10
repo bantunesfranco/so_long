@@ -1,1 +1,5 @@
 so_long
+.vscode
+*.dSYM
+*.out
+*.a

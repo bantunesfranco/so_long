@@ -6,11 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 14:15:20 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/08 10:21:52 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/10 13:32:01 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/so_long.h"
+#include "so_long.h"
 
 void	collect(t_game *game, t_collect **list, char **map, t_pos *pos)
 {
@@ -24,12 +24,30 @@ void	collect(t_game *game, t_collect **list, char **map, t_pos *pos)
 		{
 			collect->collected = true;
 			game->player->collectibles += 1;
+			break ;
 		}
 		collect = collect->next;
 	}
 }
 
-void	take_damage(t_player *player, t_enemy **list)
+void	kill(t_game *game, t_enemy **list, char **map, t_pos *pos)
+{
+	t_enemy	*enemy;
+
+	enemy = *list;
+	while (enemy)
+	{
+		if (enemy->killed == false \
+		&& enemy->pos->x == pos->x && enemy->pos->y == pos->y)
+		{
+			enemy->killed = true;
+			break ;
+		}
+		enemy = enemy->next;
+	}
+}
+
+bool	take_damage(t_player *player, t_enemy **list)
 {
 	t_enemy	*enemy;
 
@@ -40,8 +58,20 @@ void	take_damage(t_player *player, t_enemy **list)
 		{
 			player->lives -= 1;
 			ft_printf("DAMAGE!!! %d\n", player->lives);
-			break ;
+			return (true);
 		}
 		enemy = enemy->next;
+	}
+	return (false);
+}
+
+void	update_player_stats(t_game *game, t_player *player)
+{
+	if (take_damage(player, game->enemies) == true)
+	{
+		if (player->lives > 1)
+			ft_printf("Damage\n");
+		else
+			ft_printf("Dead\n");
 	}
 }

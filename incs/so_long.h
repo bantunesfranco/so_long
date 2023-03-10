@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/08 10:20:01 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/10 11:49:30 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 # define SO_LONG_H
 
 # include <math.h>
+#include <stdbool.h>
 # include <stdlib.h>
-# include "../libft/incs/libft.h"
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "libft.h"
+# include "MLX42/MLX42.h"
 
 # define SIZE 32
+
+typedef enum e_dir
+{
+	UP = 0,
+	DOWN = 1,
+	LEFT = 2,
+	RIGHT = 3,
+}	t_dir;
 
 typedef struct s_pos
 {
@@ -29,6 +38,8 @@ typedef struct s_pos
 typedef struct s_collect
 {
 	bool				collected;
+	mlx_image_t			*img;
+	mlx_texture_t		**sprites;
 	t_pos				*pos;
 	struct s_collect	*next;
 }	t_collect;
@@ -36,19 +47,23 @@ typedef struct s_collect
 typedef struct s_enemy
 {
 	bool			killed;
+	mlx_image_t		*img;
+	mlx_texture_t	**sprites;
 	t_pos			*pos;
 	struct s_enemy	*next;
 }	t_enemy;
 
 typedef struct s_player
 {
-	mlx_image_t	*sprite;
-	int32_t		dir;
-	int32_t		lives;
-	int32_t		collectibles;
-	t_pos		*pos;
-	t_pos		*start_pos;
-	bool		locked;
+	mlx_image_t		*img;
+	mlx_texture_t	**sprites;
+	int32_t			dir;
+	int32_t			lives;
+	int32_t			collectibles;
+	int32_t			moves;
+	t_pos			*pos;
+	t_pos			*start_pos;
+	bool			locked;
 }	t_player;
 
 typedef struct s_map
@@ -74,19 +89,23 @@ typedef struct s_game
 	t_enemy		**enemies;
 	t_collect	**collectibles;
 	mlx_image_t	**map_tiles;
-	int			moves;
 	double		time;
 	bool		status;
 	bool		exit_status;
 }	t_game;
 
 void			init_game(t_game *game, char **argv);
+void			enemy_add_back(t_enemy **lst, t_enemy *new);
+void			collect_add_back(t_collect **lst, t_collect *new);
 
 void			render_walls(t_game *game, int x, int y);
 void			render_map(t_game *game, char **map);
 void			render_player(t_game *game, t_player *player);
 
+void			update_player_stats(t_game *game, t_player *player);
 void			collect(t_game *game, t_collect **list, char **map, t_pos *pos);
+void			kill(t_game *game, t_enemy **list, char **map, t_pos *pos);
+bool			take_damage(t_player *player, t_enemy **list);
 void			interactions(mlx_key_data_t k, void *param);
 void			draw_player(void *param);
 
@@ -98,6 +117,8 @@ void			ft_free_int_arr(int **arr, int size);
 char			**map_parser(char *map, t_game *game);
 mlx_texture_t	*load_spritesheet(mlx_t *mlx, char *file);
 
+void			load_player_anim(t_game *game, mlx_texture_t *txt, int frames, int y);
+mlx_texture_t	*mlx_texture_area_to_texture(mlx_texture_t *texture, uint32_t xy[2], uint32_t wh[2]);
 void			clear_spritelist(t_game *game, mlx_image_t **arr);
 
 #endif

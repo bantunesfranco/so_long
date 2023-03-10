@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/08 09:23:32 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/10 11:07:12 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	update_game(void *param)
 	t_game	*game;
 
 	game = param;
-	render_player(game, game->player);
-	// render_enemies(game, game->enemies);
-	// update_player_stats(game, game->player);
+	// update_player(game, game->player);
+
+	// printf("%d\n", (int32_t)(mlx_get_time() * 100) % 10);
+
+	// update_enemies(game, game->enemies);
+	update_player_stats(game, game->player);
 }
 
 int	main(int argc, char **argv)
@@ -28,9 +31,6 @@ int	main(int argc, char **argv)
 	mlx_t			*mlx;
 
 	init_game(&game, argv);
-	game.mlx = mlx_init(game.width, game.height, "so_long", true);
-	if (!game.mlx)
-		exit(EXIT_FAILURE);
 	render_map(&game, game.map);
 	mlx_loop_hook(game.mlx, update_game, (void *)&game);
 	mlx_key_hook(game.mlx, interactions, (void *)&game);

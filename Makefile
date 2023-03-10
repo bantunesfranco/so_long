@@ -13,13 +13,15 @@ NAME = so_long
 SOURCES = main.c\
 		utils/arrays_and_lists.c\
 		utils/init_game.c\
+		utils/split_texture.c\
 		maps/make_map.c\
 		maps/validate_map.c\
 		maps/validate_path.c\
 		player/actions.c\
 		player/stats.c\
 		graphics/draw_player.c\
-		graphics/render_walls.c
+		graphics/render_walls.c\
+		graphics/render_map.c
 
 LIBFT = libft/libft.a
 MLX = MLX42/build/libmlx42.a
@@ -29,20 +31,19 @@ SRCS = ${addprefix ${DIR_S}/,${SOURCES}}
 DIR_S = srcs
 DIR_I = incs
 
-${NAME}: ${SRCS} 
-	@cmake MLX42 -B MLX42/build
-	@make -C MLX42/build -j4
+INCS = -I${DIR_I} -Ilibft/incs -IMLX42/include
+
+
+${NAME}: ${SRCS} mlx
 	@make -s -C libft
 	@echo "${BLUE}Compiling ${NAME}${END}"
-	@${CC} ${CFLAGS} ${SRCS} ${LIBFT} ${MLX} -I ${DIR_I} -I  MLX42/include/ -o ${NAME}
+	@${CC} ${CFLAGS} ${SRCS} ${LIBFT} ${MLX} -I ${INCS} -o ${NAME}
 	@echo "${GREEN}Done!${END}"
 
-test:
-	@cmake MLX42 -B MLX42/build
-	@make -C MLX42/build -j4
+test: ${SRCS} mlx
 	@make -s -C libft
 	@echo "${YELLOW}Testing ${NAME}${END}"
-	@${CC} ${CFLAGS} -fsanitize=address ${SRCS} ${LIBFT} ${MLX} -I ${DIR_I} -I MLX42/include -o ${NAME}
+	@${CC} ${CFLAGS} -fsanitize=address ${SRCS} ${LIBFT} ${MLX} -I ${INCS} -o ${NAME}
 	@echo "${GREEN}Done!${END}"
 
 bonus: ${NAME}
@@ -62,9 +63,16 @@ fclean: clean
 
 re: fclean all
 
+mlx: ${MLX}
+	@cmake MLX42 -B MLX42/build
+	@make -C MLX42/build -j4
+	
 git:
 	git commit -m "auto commit"
 	git push
+
+submodules:
+	git pull --recurse-submodules
 
 update:
 	git submodule update --recursive --remote

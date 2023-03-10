@@ -6,11 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 15:44:31 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/06 13:18:24 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/09 15:29:45 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/so_long.h"
+#include "../../incs/so_long.h"
 
 static void	render_middle(t_game *game, mlx_texture_t *texture, int x, int y)
 {

@@ -6,12 +6,12 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:38:55 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/02/24 11:04:37 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/10 12:05:37 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
-#include "../incs/so_long.h"
+#include "so_long.h"
 
 static bool	is_valid_coord(t_pos *new, t_map *info, char **map)
 {

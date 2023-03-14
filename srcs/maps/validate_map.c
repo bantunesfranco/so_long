@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdbool.h>
-#include "so_long.h"
+#include <so_long.h>
 
 static bool	check_border(char **map, t_map	*info)
 {

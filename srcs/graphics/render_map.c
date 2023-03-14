@@ -6,11 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 15:04:27 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/09 15:32:23 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/13 12:28:28 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/so_long.h"
+#include <so_long.h>
 
 void	render_exit(t_game *game, int x, int y)
 {
@@ -25,6 +25,24 @@ void	render_exit(t_game *game, int x, int y)
 	mlx_image_to_window(game->mlx, img, \
 	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
 	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2 + 5);
+	mlx_set_instance_depth(&img->instances[0], 2);
+	mlx_delete_texture(texture);
+}
+
+void	render_enemies(t_game *game, int x, int y)
+{
+	mlx_image_t		*img;
+	mlx_texture_t	*texture;
+	const uint32_t	xy[2] = {0, 0};
+	const uint32_t	wh[2] = {48, 48};
+
+	texture = mlx_load_png("./sprites/ghost48.png");
+	img = mlx_texture_area_to_image(game->mlx, texture, \
+	(uint32_t *)xy, (uint32_t *)wh);
+	mlx_image_to_window(game->mlx, img, \
+	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
+	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2 - 20);
+	// mlx_set_instance_depth(&img->instances[0], 3);
 	mlx_delete_texture(texture);
 }
 
@@ -41,6 +59,7 @@ void	render_collectibles(t_game *game, int x, int y)
 	mlx_image_to_window(game->mlx, img, \
 	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
 	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2);
+	mlx_set_instance_depth(&img->instances[0], 2);
 	mlx_delete_texture(texture);
 }
 
@@ -57,6 +76,7 @@ void	render_floor(t_game *game, int x, int y)
 	mlx_image_to_window(game->mlx, img, \
 	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
 	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2 + 5);
+	mlx_set_instance_depth(&img->instances[0], 1);
 	mlx_delete_texture(texture);
 }
 
@@ -79,8 +99,8 @@ void	render_map(t_game *game, char **map)
 				render_collectibles(game, j, i);
 			else if (map[i][j] == 'E')
 				render_exit(game, j, i);
-			// else if (map[i][j] == 'K')
-			// 	render_enemies(game, j, i);
+			else if (map[i][j] == 'K')
+				render_enemies(game, j, i);
 			else if (map[i][j] == 'P')
 				render_player(game, game->player);
 		}

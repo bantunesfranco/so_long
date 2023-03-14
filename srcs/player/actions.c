@@ -6,11 +6,12 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/20 09:51:07 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/10 11:37:56 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/13 17:12:43 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include <so_long.h>
+#include <MLX42/MLX42_Input.h>
 
 static bool	is_valid_coord(int32_t x, int32_t y, t_map *info, char **map)
 {
@@ -29,7 +30,6 @@ static void	move_sprite(t_player *player, int32_t coord, char xy, int step)
 
 	i = 0;
 	j = 0;
-	player->lives = true;
 	player->locked = true;
 	// time = mlx_get_time();
 	if (xy == 'x')
@@ -39,6 +39,10 @@ static void	move_sprite(t_player *player, int32_t coord, char xy, int step)
 	if (xy == 'x')
 	{
 		player->img->instances[0].x += (32 * step);
+		if (step < 0)
+			player->dir = 2;
+		else
+			player->dir = 3;
 		// time = mlx_get_time();
 	}
 	else if (xy == 'y')
@@ -109,7 +113,10 @@ static void	open_chest(t_game *game)
 		newpos.x = pos->x + dir[i][0];
 		newpos.y = pos->y + dir[i][1];
 		if (game->map[newpos.y][newpos.x] == 'C')
-			collect(game, game->collectibles, game->map, &newpos);
+		{	
+			if (collect(game, game->collectibles, game->map, &newpos) == true)
+				break ;
+		}
 		i++;
 	}
 }
@@ -128,10 +135,12 @@ static void	attack(t_game *game)
 		newpos.x = pos->x + dir[i][0];
 		newpos.y = pos->y + dir[i][1];
 		if (game->map[newpos.y][newpos.x] == 'K')
-			kill(game, game->enemies, game->map, &newpos);
+		{
+			if (kill(game, game->enemies, game->map, &newpos) == true)
+				break ;
+		}
 		i++;
 	}
-	ft_printf("HADOUKEN!!\n");
 }
 
 void	interactions(mlx_key_data_t k, void *param)

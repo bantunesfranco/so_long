@@ -6,11 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/10 11:44:22 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/10 13:54:54 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include <so_long.h>
 
 static void	add_collect(mlx_t *mlx, t_collect **list, int x, int y)
 {

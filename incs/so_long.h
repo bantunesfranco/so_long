@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/10 11:49:30 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/14 10:56:17 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define SO_LONG_H
 
 # include <math.h>
-#include <stdbool.h>
+# include <stdbool.h>
 # include <stdlib.h>
 # include "libft.h"
-# include "MLX42/MLX42.h"
+# include <MLX42/MLX42.h>
 
 # define SIZE 32
 
@@ -50,15 +50,16 @@ typedef struct s_enemy
 	mlx_image_t		*img;
 	mlx_texture_t	**sprites;
 	t_pos			*pos;
+	t_dir			dir;
 	struct s_enemy	*next;
 }	t_enemy;
 
 typedef struct s_player
 {
 	mlx_image_t		*img;
-	mlx_texture_t	**sprites;
+	mlx_texture_t	***sprites;
 	int32_t			dir;
-	int32_t			lives;
+	int				lives;
 	int32_t			collectibles;
 	int32_t			moves;
 	t_pos			*pos;
@@ -103,8 +104,9 @@ void			render_map(t_game *game, char **map);
 void			render_player(t_game *game, t_player *player);
 
 void			update_player_stats(t_game *game, t_player *player);
-void			collect(t_game *game, t_collect **list, char **map, t_pos *pos);
-void			kill(t_game *game, t_enemy **list, char **map, t_pos *pos);
+void			update_player(t_player *player);
+bool			collect(t_game *game, t_collect **list, char **map, t_pos *pos);
+bool			kill(t_game *game, t_enemy **list, char **map, t_pos *pos);
 bool			take_damage(t_player *player, t_enemy **list);
 void			interactions(mlx_key_data_t k, void *param);
 void			draw_player(void *param);
@@ -117,8 +119,10 @@ void			ft_free_int_arr(int **arr, int size);
 char			**map_parser(char *map, t_game *game);
 mlx_texture_t	*load_spritesheet(mlx_t *mlx, char *file);
 
-void			load_player_anim(t_game *game, mlx_texture_t *txt, int frames, int y);
-mlx_texture_t	*mlx_texture_area_to_texture(mlx_texture_t *texture, uint32_t xy[2], uint32_t wh[2]);
+void			load_player_anim(t_game *game, mlx_texture_t *txt, \
+int frames, int y);
+mlx_texture_t	*mlx_texture_area_to_texture(mlx_texture_t *texture, \
+uint32_t xy[2], uint32_t wh[2]);
 void			clear_spritelist(t_game *game, mlx_image_t **arr);
 
 #endif

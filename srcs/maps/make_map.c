@@ -6,12 +6,12 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:24:44 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/10 13:12:47 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/10 13:54:32 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include "so_long.h"
+#include <so_long.h>
 
 static bool	check_file_ext(char *file)
 {

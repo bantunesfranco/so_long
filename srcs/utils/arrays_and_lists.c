@@ -6,36 +6,40 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/13 09:50:04 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/10 13:19:01 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/10 16:17:47 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include <so_long.h>
 
 void	enemy_add_back(t_enemy **lst, t_enemy *new)
 {
 	static t_enemy	*last;
 
+	if (!last)
+		last = new;
 	if (*lst)
 	{
-		last = *lst;
 		last->next = new;
 	}
 	else
 		*lst = new;
+	last = new;
 }
 
 void	collect_add_back(t_collect **lst, t_collect *new)
 {
 	static t_collect	*last;
 
+	if (!last)
+		last = new;
 	if (*lst)
 	{
-		last = *lst;
 		last->next = new;
 	}
 	else
 		*lst = new;
+	last = new;
 }
 
 void	ft_free_int_arr(int **arr, int size)

@@ -6,12 +6,12 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:38:55 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/10 12:05:37 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/10 16:30:53 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
-#include "so_long.h"
+#include <so_long.h>
 
 static bool	is_valid_coord(t_pos *new, t_map *info, char **map)
 {
@@ -23,7 +23,7 @@ static bool	is_valid_coord(t_pos *new, t_map *info, char **map)
 	if (!(x >= 1 && x < info->cols - 1 && y >= 1 && y < info->rows - 1))
 		return (false);
 	if (!(!info->visited[y][x] && (map[y][x] == 'E' || map[y][x] == 'C' \
-	|| map[y][x] == '0' || map[y][x] == 'P')))
+	|| map[y][x] == '0' || map[y][x] == 'P' || map[y][x] == 'K')))
 		return (false);
 	return (true);
 }

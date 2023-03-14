@@ -21,7 +21,8 @@ SOURCES = main.c\
 		player/stats.c\
 		graphics/draw_player.c\
 		graphics/render_walls.c\
-		graphics/render_map.c
+		graphics/render_map.c\
+		graphics/play_anim.c
 
 LIBFT = libft/libft.a
 MLX = MLX42/build/libmlx42.a

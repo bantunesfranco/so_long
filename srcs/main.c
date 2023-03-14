@@ -6,11 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/13 17:04:54 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/14 11:55:15 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include <so_long.h>
 
 void	update_game(void *param)
 {

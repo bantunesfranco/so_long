@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/14 10:56:17 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/14 11:32:37 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void			collect_add_back(t_collect **lst, t_collect *new);
 void			render_walls(t_game *game, int x, int y);
 void			render_map(t_game *game, char **map);
 void			render_player(t_game *game, t_player *player);
+void			play_anim(t_player *player, mlx_texture_t **arr, int frames);
 
 void			update_player_stats(t_game *game, t_player *player);
 void			update_player(t_player *player);

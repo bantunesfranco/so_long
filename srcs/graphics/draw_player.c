@@ -6,11 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/24 15:48:43 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/14 11:16:00 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/14 11:41:03 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include <so_long.h>
 #include <MLX42/MLX42_Int.h>
 
 void	update_player(t_player *player)

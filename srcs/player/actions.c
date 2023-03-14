@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/20 09:51:07 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/13 17:12:43 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/14 11:56:33 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,10 @@ static void	open_chest(t_game *game)
 
 static void	attack(t_game *game)
 {
+	int			i;
 	t_pos		*pos;
 	t_pos		newpos;
 	const int	dir[4][2] = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
-	int			i;
 
 	i = 0;
 	pos = game->player->pos;
@@ -141,6 +141,7 @@ static void	attack(t_game *game)
 		}
 		i++;
 	}
+	// play_anim(game->player, game->player->sprites[2], 8);
 }
 
 void	interactions(mlx_key_data_t k, void *param)

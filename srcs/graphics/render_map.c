@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 15:04:27 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/13 12:28:28 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/14 12:21:34 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,19 @@ void	render_exit(t_game *game, int x, int y)
 
 void	render_enemies(t_game *game, int x, int y)
 {
-	mlx_image_t		*img;
-	mlx_texture_t	*texture;
+	t_enemy			*head;
 	const uint32_t	xy[2] = {0, 0};
 	const uint32_t	wh[2] = {48, 48};
 
-	texture = mlx_load_png("./sprites/ghost48.png");
-	img = mlx_texture_area_to_image(game->mlx, texture, \
-	(uint32_t *)xy, (uint32_t *)wh);
+	while (head)
+	{
+		if (head->pos->x == x && head->pos->y == y)
+		{
+			head->img->pixels = head->sprites[0]->pixels;
+			break ;
+		}
+		head = head->next;
+	}
 	mlx_image_to_window(game->mlx, img, \
 	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
 	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2 - 20);

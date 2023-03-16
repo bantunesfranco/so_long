@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 14:15:20 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 11:21:38 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 14:50:52 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	collect(t_game *game, t_collect **list, char **map, t_pos *pos)
 		{
 			collect->collected = true;
 			game->player->collectibles += 1;
-			ft_printf("New Collect\n");
+			collect->img->pixels = collect->sprites[1];
 			return (true);
 		}
 		collect = collect->next;

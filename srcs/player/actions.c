@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/20 09:51:07 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 14:20:49 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 14:50:02 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	move_sprite(t_player *player, int32_t coord, char xy, int step)
 
 	i = 0;
 	j = 0;
-	player->locked = true;
 	// time = mlx_get_time();
 	if (xy == 'x')
 		player->pos->x += step;
@@ -59,22 +58,22 @@ static void	can_move(t_player *player, t_game *game, int32_t dir)
 
 	x = player->pos->x;
 	y = player->pos->y;
-	if (dir == UP && player->locked == false)
+	if (dir == UP && game->status != LOCKED)
 	{
 		if (is_valid_coord(x, y - 1, game->map_info, game->map) == true)
 			move_sprite(player, y, 'y', -1);
 	}
-	else if (dir == DOWN && player->locked == false)
+	else if (dir == DOWN && game->status != LOCKED)
 	{
 		if (is_valid_coord(x, y + 1, game->map_info, game->map) == true)
 			move_sprite(player, y, 'y', 1);
 	}
-	else if (dir == LEFT && player->locked == false)
+	else if (dir == LEFT && game->status != LOCKED)
 	{
 		if (is_valid_coord(x - 1, y, game->map_info, game->map) == true)
 			move_sprite(player, x, 'x', -1);
 	}
-	else if (dir == RIGHT && player->locked == false)
+	else if (dir == RIGHT && game->status != LOCKED)
 	{
 		if (is_valid_coord(x + 1, y, game->map_info, game->map) == true)
 			move_sprite(player, x, 'x', 1);
@@ -85,18 +84,24 @@ static void	move(mlx_key_data_t k, void *param)
 {
 	mlx_t			*mlx;
 	t_game			*game;
+	static int		time;
 
 	game = param;
 	mlx = game->mlx;
-	if ((k.key == MLX_KEY_W || k.key == MLX_KEY_UP) && k.action == MLX_PRESS)
-		can_move(game->player, game, UP);
-	if ((k.key == MLX_KEY_S || k.key == MLX_KEY_DOWN) && k.action == MLX_PRESS)
-		can_move(game->player, game, DOWN);
-	if ((k.key == MLX_KEY_A || k.key == MLX_KEY_LEFT) && k.action == MLX_PRESS)
-		can_move(game->player, game, LEFT);
-	if ((k.key == MLX_KEY_D || k.key == MLX_KEY_RIGHT) && k.action == MLX_PRESS)
-		can_move(game->player, game, RIGHT);
-	game->player->locked = false;
+	if (!time)
+		time = mlx_get_time();
+	if (mlx_get_time() - time > 0.5)
+	{
+		if ((k.key == MLX_KEY_W || k.key == MLX_KEY_UP) && k.action == MLX_PRESS)
+			can_move(game->player, game, UP);
+		if ((k.key == MLX_KEY_S || k.key == MLX_KEY_DOWN) && k.action == MLX_PRESS)
+			can_move(game->player, game, DOWN);
+		if ((k.key == MLX_KEY_A || k.key == MLX_KEY_LEFT) && k.action == MLX_PRESS)
+			can_move(game->player, game, LEFT);
+		if ((k.key == MLX_KEY_D || k.key == MLX_KEY_RIGHT) && k.action == MLX_PRESS)
+			can_move(game->player, game, RIGHT);
+		time = mlx_get_time();
+	}
 }
 
 static void	open_chest(t_game *game)
@@ -115,7 +120,10 @@ static void	open_chest(t_game *game)
 		if (game->map[newpos.y][newpos.x] == 'C')
 		{	
 			if (collect(game, game->collectibles, game->map, &newpos) == true)
+			{	
+				ft_printf("collected = %d\n", game->player->collectibles);
 				break ;
+			}
 		}
 		i++;
 	}
@@ -141,7 +149,7 @@ static void	attack(t_game *game)
 		}
 		i++;
 	}
-	play_anim(game->player, game->player->sprites[2], 8);
+	// play_anim(game->player, game->player->sprites[2], 8);
 }
 
 void	interactions(mlx_key_data_t k, void *param)
@@ -151,7 +159,7 @@ void	interactions(mlx_key_data_t k, void *param)
 
 	game = param;
 	mlx = game->mlx;
-	if (k.key == MLX_KEY_E && k.action == MLX_PRESS && game->status)
+	if (k.key == MLX_KEY_E && k.action == MLX_PRESS)
 		open_chest(game);
 	else if (k.key == MLX_KEY_SPACE && k.action == MLX_PRESS)
 		attack(game);
@@ -159,4 +167,6 @@ void	interactions(mlx_key_data_t k, void *param)
 		exit_game(game);
 	else
 		move(k, param);
+	// else if (k.key == MLX_KEY_R && k.action == MLX_PRESS)
+	// 	restart_game(game);
 }

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 12:44:37 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 14:32:04 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ void	init_game(t_game *game, char **argv)
 	game->map_tiles = ft_calloc(game->map_info->size, sizeof(mlx_image_t *));
 	if (!game->map_tiles)
 		ft_error("so_long", ENOMEM);
-	game->status = true;
-	game->exit_status = false;
+	game->status = ACTIVE;
 	game->time = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 14:24:30 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 16:17:58 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,38 +102,52 @@ typedef struct s_game
 	t_status	status;
 }	t_game;
 
+
+/* init game*/
 void			init_game(t_game *game, char **argv);
 void			enemy_add_back(t_enemy **lst, t_enemy *new);
 void			collect_add_back(t_collect **lst, t_collect *new);
 
+/* map parsing*/
+char			**map_parser(char *map, t_game *game);
+bool			validate_map(char **map, t_map	*info, t_game *game);
+bool			can_exit(char **map, t_map *info, t_pos *pos);
+
+/* graphics */
 void			render_walls(t_game *game, int x, int y);
 void			render_map(t_game *game, char **map);
 void			render_player(t_game *game, t_player *player);
-void			play_anim(t_player *player, uint8_t **arr, int frames);
+
+/* pixel buffers*/
 uint8_t			**load_poi_anim(t_game *game, mlx_texture_t *txt, \
 											int frames, int y);
-// void			make_frames(uint8_t **arr, mlx_texture_t *text, int x, int y);
-
-void			update_player_stats(t_game *game, t_player *player);
-void			update_player(t_player *player);
-void			update_enemy(t_enemy **list);
-bool			collect(t_game *game, t_collect **list, char **map, t_pos *pos);
-bool			kill(t_game *game, t_enemy **list, char **map, t_pos *pos);
-bool			take_damage(t_player *player, t_enemy **list);
-void			interactions(mlx_key_data_t k, void *param);
-void			draw_player(void *param);
-
-void			free_info(t_map *info);
-bool			can_exit(char **map, t_map *info, t_pos *pos);
-bool			validate_map(char **map, t_map	*info, t_game *game);
-
-void			ft_free_int_arr(int **arr, int size);
-char			**map_parser(char *map, t_game *game);
-mlx_texture_t	*load_spritesheet(mlx_t *mlx, char *file);
-
-void			exit_game(t_game *game);
-void			clear_spritelist(t_game *game, mlx_image_t **arr);
+uint8_t			**load_player_anim(t_game *game, mlx_texture_t *txt, \
+								int frames, int y);
 uint8_t			*split_text(mlx_texture_t *text, uint32_t xy[2], \
 							uint32_t wh[2]);
+
+/* animations */
+void			draw_player(void *param);
+void			update_player(t_player *player);
+void			render_enemies(t_game *game, int x, int y);
+void			update_enemy(t_enemy **list);
+void			render_collectibles(t_game *game, int x, int y);
+void			play_anim(t_player *player, uint8_t **arr, int frames);
+
+/* game interations */
+void			interactions(mlx_key_data_t k, void *param);
+bool			collect(t_game *game, t_collect **list, char **map, t_pos *pos);
+bool			kill(t_game *game, t_enemy **list, char **map, t_pos *pos);
+
+/* update game state */
+bool			take_damage(t_player *player, t_enemy **list);
+void			update_player_stats(t_game *game, t_player *player);
+void			exit_game(t_game *game);
+void			restart_game(t_game *game);
+
+/* cleanup */
+void			free_info(t_map *info);
+void			ft_free_int_arr(int **arr, int size);
+void			clear_spritelist(t_game *game, mlx_image_t **arr);
 
 #endif

@@ -6,58 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 14:37:21 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 12:58:25 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 16:10:03 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
-
-static void	make_frames(uint8_t **arr, mlx_texture_t *text, int x, int y)
-{
-	const uint32_t		xy[2] = {48 * x, 48 * y};
-	const uint32_t		wh[2] = {48, 48};
-
-	if (y)
-		x += 6;
-	arr[x] = split_text(text, (uint32_t *)xy, (uint32_t *)wh);
-	if (!arr[x])
-	{
-		while (x >= 0)
-		{
-			free(arr[x]);
-			x--;
-		}
-		free(arr);
-		ft_error("so_long", mlx_errno);
-	}
-}
-
-uint8_t	**load_poi_anim(t_game *game, mlx_texture_t *txt, int frames, int y)
-{
-	mlx_texture_t		*text;
-	uint8_t				**sprites;
-	int					i;
-	int					x;
-
-	if (!txt)
-		ft_error("so_long", MLX_INVFILE);
-	sprites = ft_calloc(frames, sizeof(uint8_t *));
-	if (!sprites)
-		ft_error("so_long", ENOMEM);
-	i = -1;
-	x = 0;
-	while (++i < frames)
-	{
-		make_frames(sprites, txt, x, y);
-		x++;
-		if (i + 1 == frames / 2)
-		{
-			x = 0;
-			y = 1;
-		}
-	}
-	return (sprites);
-}
 
 void	update_enemy(t_enemy **list)
 {
@@ -81,4 +34,48 @@ void	update_enemy(t_enemy **list)
 		time = mlx_get_time();
 		iter++;
 	}
+}
+
+void	render_collectibles(t_game *game, int x, int y)
+{
+	t_collect		*head;
+	const uint32_t	xy[2] = {SIZE * 3, SIZE};
+	const uint32_t	wh[2] = {SIZE, SIZE};
+
+	head = *game->collectibles;
+	while (head)
+	{
+		if (head->pos->x == x && head->pos->y == y)
+		{
+			head->img->pixels = head->sprites[0];
+			break ;
+		}
+		head = head->next;
+	}
+	mlx_image_to_window(game->mlx, head->img, \
+	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
+	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2 - 20);
+	// mlx_set_instance_depth(&img->instances[0], 3);
+}
+
+void	render_enemies(t_game *game, int x, int y)
+{
+	t_enemy			*head;
+	const uint32_t	xy[2] = {0, 0};
+	const uint32_t	wh[2] = {48, 48};
+
+	head = *game->enemies;
+	while (head)
+	{
+		if (head->pos->x == x && head->pos->y == y)
+		{
+			head->img->pixels = head->sprites[0];
+			break ;
+		}
+		head = head->next;
+	}
+	mlx_image_to_window(game->mlx, head->img, \
+	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
+	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2 - 20);
+	// mlx_set_instance_depth(&img->instances[0], 3);
 }

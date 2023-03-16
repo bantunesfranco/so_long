@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/24 15:48:43 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 12:52:19 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 16:02:46 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,47 +29,6 @@ void	update_player(t_player *player)
 		time = mlx_get_time();
 		iter++;
 	}
-}
-
-static void	make_frames(uint8_t **arr, mlx_texture_t *text, int x, int y)
-{
-	const uint32_t		xy[2] = {48 * x, 48 * y};
-	const uint32_t		wh[2] = {48, 48};
-
-	arr[x] = split_text(text, (uint32_t *)xy, (uint32_t *)wh);
-	if (!arr[x])
-	{
-		while (x >= 0)
-		{
-			free(arr[x]);
-			x--;
-		}
-		free(arr);
-		ft_error("so_long", mlx_errno);
-	}
-}
-
-static uint8_t	**load_player_anim(t_game *game, mlx_texture_t *txt, \
-											int frames, int y)
-{
-	mlx_texture_t		*text;
-	uint8_t				**sprites;
-	int					i;
-	int					x;
-
-	sprites = ft_calloc(frames, sizeof(uint8_t *));
-	if (!sprites)
-		ft_error("so_long", ENOMEM);
-	i = -1;
-	x = 0;
-	while (++i < frames)
-	{
-		make_frames(sprites, txt, x, y);
-		x++;
-		if (i + 1 == frames / 2)
-			x = 8;
-	}
-	return (sprites);
 }
 
 void	render_player(t_game *game, t_player *player)

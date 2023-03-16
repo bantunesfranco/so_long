@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/20 09:51:07 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 14:50:02 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 16:19:25 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,10 +163,10 @@ void	interactions(mlx_key_data_t k, void *param)
 		open_chest(game);
 	else if (k.key == MLX_KEY_SPACE && k.action == MLX_PRESS)
 		attack(game);
+	else if (k.key == MLX_KEY_R && k.action == MLX_PRESS)
+		restart_game(game);
 	else if (k.key == MLX_KEY_ESCAPE && k.action == MLX_PRESS)
 		exit_game(game);
 	else
 		move(k, param);
-	// else if (k.key == MLX_KEY_R && k.action == MLX_PRESS)
-	// 	restart_game(game);
 }

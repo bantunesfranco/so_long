@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 14:32:04 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 16:25:32 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ static void	add_enemy(mlx_t *mlx, t_enemy **list, \
 	if (!enemy)
 		ft_error("so_long", ENOMEM);
 	enemy->pos = ft_calloc(1, sizeof(t_pos));
-	if (!enemy->pos)
+	enemy->start_pos = ft_calloc(1, sizeof(t_pos));
+	if (!enemy->pos || !enemy->start_pos)
 		ft_error("so_long", ENOMEM);
-	enemy->pos->x = pos->x;
-	enemy->pos->y = pos->y;
+	enemy->start_pos->x = pos->x;
+	enemy->start_pos->y = pos->y;
+	ft_memcpy(enemy->pos, enemy->start_pos, sizeof(t_pos *));
 	enemy->killed = false;
 	enemy->next = NULL;
 	enemy->img = mlx_new_image(mlx, 48, 48);

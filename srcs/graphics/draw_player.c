@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/24 15:48:43 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 16:02:46 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 17:36:34 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	render_player(t_game *game, t_player *player)
 	mlx_texture_t	*texture;
 	uint8_t			***sprites;
 
-	pos = player->pos;
+	pos = player->start_pos;
 	img = player->img;
 	texture = mlx_load_png("./sprites/player48.png");
 	if (!texture)

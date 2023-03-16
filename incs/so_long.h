@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 16:17:58 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 16:25:55 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_enemy
 	bool			killed;
 	mlx_image_t		*img;
 	uint8_t			**sprites;
+	t_pos			*start_pos;
 	t_pos			*pos;
 	t_dir			dir;
 	struct s_enemy	*next;

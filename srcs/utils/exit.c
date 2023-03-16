@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/15 11:03:25 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 12:00:09 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 16:26:36 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	clear_enemies(t_game *game, t_enemy **list)
 	{
 		temp = head;
 		free(head->pos);
+		free(head->start_pos);
 		(*(&head))->img->pixels = NULL;
 		mlx_delete_image(game->mlx, head->img);
 		(*(&head))->img = NULL;

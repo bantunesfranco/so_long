@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 11:20:09 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 12:27:50 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	update_game(void *param)
 	t_game	*game;
 
 	game = param;
-	// update_enemies(game, game->enemies);
+	update_enemy(game->enemies);
 	update_player(game->player);
 	update_player_stats(game, game->player);
 }

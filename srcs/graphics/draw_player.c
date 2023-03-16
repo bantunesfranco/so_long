@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/24 15:48:43 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 11:17:48 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 12:52:19 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	update_player(t_player *player)
 	}
 }
 
-void	make_frames(uint8_t **arr, mlx_texture_t *text, int x, int y)
+static void	make_frames(uint8_t **arr, mlx_texture_t *text, int x, int y)
 {
 	const uint32_t		xy[2] = {48 * x, 48 * y};
 	const uint32_t		wh[2] = {48, 48};
 
-	arr[x] = mlx_texture_area_to_texture(text, (uint32_t *)xy, (uint32_t *)wh);
+	arr[x] = split_text(text, (uint32_t *)xy, (uint32_t *)wh);
 	if (!arr[x])
 	{
 		while (x >= 0)

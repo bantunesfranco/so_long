@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 11:12:53 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 14:24:30 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 # include <MLX42/MLX42.h>
 
 # define SIZE 32
+
+typedef enum e_status
+{
+	ACTIVE = 0,
+	CAN_EXIT = 1,
+	END = 2,
+	LOCKED = 3,
+	RESTART = 4,
+}	t_status;
 
 typedef enum e_dir
 {
@@ -64,7 +73,6 @@ typedef struct s_player
 	int32_t			moves;
 	t_pos			*pos;
 	t_pos			*start_pos;
-	bool			locked;
 }	t_player;
 
 typedef struct s_map
@@ -91,8 +99,7 @@ typedef struct s_game
 	t_collect	**collectibles;
 	mlx_image_t	**map_tiles;
 	double		time;
-	bool		status;
-	bool		exit_status;
+	t_status	status;
 }	t_game;
 
 void			init_game(t_game *game, char **argv);
@@ -105,10 +112,11 @@ void			render_player(t_game *game, t_player *player);
 void			play_anim(t_player *player, uint8_t **arr, int frames);
 uint8_t			**load_poi_anim(t_game *game, mlx_texture_t *txt, \
 											int frames, int y);
-void			make_frames(uint8_t **arr, mlx_texture_t *text, int x, int y);
+// void			make_frames(uint8_t **arr, mlx_texture_t *text, int x, int y);
 
 void			update_player_stats(t_game *game, t_player *player);
 void			update_player(t_player *player);
+void			update_enemy(t_enemy **list);
 bool			collect(t_game *game, t_collect **list, char **map, t_pos *pos);
 bool			kill(t_game *game, t_enemy **list, char **map, t_pos *pos);
 bool			take_damage(t_player *player, t_enemy **list);
@@ -125,7 +133,7 @@ mlx_texture_t	*load_spritesheet(mlx_t *mlx, char *file);
 
 void			exit_game(t_game *game);
 void			clear_spritelist(t_game *game, mlx_image_t **arr);
-uint8_t			*mlx_texture_area_to_texture(mlx_texture_t *texture, \
-											uint32_t xy[2], uint32_t wh[2]);
+uint8_t			*split_text(mlx_texture_t *text, uint32_t xy[2], \
+							uint32_t wh[2]);
 
 #endif

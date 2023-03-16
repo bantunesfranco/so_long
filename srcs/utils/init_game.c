@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 11:15:06 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 12:44:37 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	add_enemy(mlx_t *mlx, t_enemy **list, \
 	enemy->killed = false;
 	enemy->next = NULL;
 	enemy->img = mlx_new_image(mlx, 48, 48);
+	enemy->dir = RIGHT;
 	enemy->sprites = arr;
 	if (!*list)
 		enemy_add_back(list, enemy);
@@ -103,7 +104,7 @@ static void	init_player(t_game *game)
 	if (!player->pos)
 		ft_error("so_long", ENOMEM);
 	player->lives = 3;
-	player->dir = 0;
+	player->dir = RIGHT;
 	player->collectibles = 0;
 	player->start_pos->x = 0;
 	player->start_pos->y = 0;

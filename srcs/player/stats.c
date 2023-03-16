@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 14:15:20 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/14 11:48:02 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 11:21:38 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ bool	take_damage(t_player *player, t_enemy **list)
 		return (false);
 	while (enemy)
 	{
-		if (player->pos->x == enemy->pos->x && player->pos->y == enemy->pos->y)
+		if (enemy->killed == false \
+		&& player->pos->x == enemy->pos->x && player->pos->y == enemy->pos->y)
 		{
 			ft_printf("%d\n", player->lives);
 			player->lives -= 1;

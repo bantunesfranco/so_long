@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/14 11:32:37 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/16 11:12:53 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_collect
 {
 	bool				collected;
 	mlx_image_t			*img;
-	mlx_texture_t		**sprites;
+	uint8_t				**sprites;
 	t_pos				*pos;
 	struct s_collect	*next;
 }	t_collect;
@@ -48,7 +48,7 @@ typedef struct s_enemy
 {
 	bool			killed;
 	mlx_image_t		*img;
-	mlx_texture_t	**sprites;
+	uint8_t			**sprites;
 	t_pos			*pos;
 	t_dir			dir;
 	struct s_enemy	*next;
@@ -57,7 +57,7 @@ typedef struct s_enemy
 typedef struct s_player
 {
 	mlx_image_t		*img;
-	mlx_texture_t	***sprites;
+	uint8_t			***sprites;
 	int32_t			dir;
 	int				lives;
 	int32_t			collectibles;
@@ -102,7 +102,10 @@ void			collect_add_back(t_collect **lst, t_collect *new);
 void			render_walls(t_game *game, int x, int y);
 void			render_map(t_game *game, char **map);
 void			render_player(t_game *game, t_player *player);
-void			play_anim(t_player *player, mlx_texture_t **arr, int frames);
+void			play_anim(t_player *player, uint8_t **arr, int frames);
+uint8_t			**load_poi_anim(t_game *game, mlx_texture_t *txt, \
+											int frames, int y);
+void			make_frames(uint8_t **arr, mlx_texture_t *text, int x, int y);
 
 void			update_player_stats(t_game *game, t_player *player);
 void			update_player(t_player *player);
@@ -120,10 +123,9 @@ void			ft_free_int_arr(int **arr, int size);
 char			**map_parser(char *map, t_game *game);
 mlx_texture_t	*load_spritesheet(mlx_t *mlx, char *file);
 
-void			load_player_anim(t_game *game, mlx_texture_t *txt, \
-int frames, int y);
-mlx_texture_t	*mlx_texture_area_to_texture(mlx_texture_t *texture, \
-uint32_t xy[2], uint32_t wh[2]);
+void			exit_game(t_game *game);
 void			clear_spritelist(t_game *game, mlx_image_t **arr);
+uint8_t			*mlx_texture_area_to_texture(mlx_texture_t *texture, \
+											uint32_t xy[2], uint32_t wh[2]);
 
 #endif

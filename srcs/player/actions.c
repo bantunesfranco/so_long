@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/20 09:51:07 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 16:19:25 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 12:02:45 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static bool	is_valid_coord(int32_t x, int32_t y, t_map *info, char **map)
 	return (true);
 }
 
-static void	move_sprite(t_player *player, int32_t coord, char xy, int step)
+static void	move_sprite(t_player *player, char xy, int step)
 {
 	// double	time;
 	int		i;
@@ -61,22 +61,22 @@ static void	can_move(t_player *player, t_game *game, int32_t dir)
 	if (dir == UP && game->status != LOCKED)
 	{
 		if (is_valid_coord(x, y - 1, game->map_info, game->map) == true)
-			move_sprite(player, y, 'y', -1);
+			move_sprite(player, 'y', -1);
 	}
 	else if (dir == DOWN && game->status != LOCKED)
 	{
 		if (is_valid_coord(x, y + 1, game->map_info, game->map) == true)
-			move_sprite(player, y, 'y', 1);
+			move_sprite(player, 'y', 1);
 	}
 	else if (dir == LEFT && game->status != LOCKED)
 	{
 		if (is_valid_coord(x - 1, y, game->map_info, game->map) == true)
-			move_sprite(player, x, 'x', -1);
+			move_sprite(player, 'x', -1);
 	}
 	else if (dir == RIGHT && game->status != LOCKED)
 	{
 		if (is_valid_coord(x + 1, y, game->map_info, game->map) == true)
-			move_sprite(player, x, 'x', 1);
+			move_sprite(player, 'x', 1);
 	}
 }
 
@@ -90,15 +90,19 @@ static void	move(mlx_key_data_t k, void *param)
 	mlx = game->mlx;
 	if (!time)
 		time = mlx_get_time();
-	if (mlx_get_time() - time > 0.5)
+	if (mlx_get_time() - time > 0.15)
 	{
-		if ((k.key == MLX_KEY_W || k.key == MLX_KEY_UP) && k.action == MLX_PRESS)
+		if ((k.key == MLX_KEY_W || k.key == MLX_KEY_UP) \
+		&& k.action == MLX_PRESS)
 			can_move(game->player, game, UP);
-		if ((k.key == MLX_KEY_S || k.key == MLX_KEY_DOWN) && k.action == MLX_PRESS)
+		if ((k.key == MLX_KEY_S || k.key == MLX_KEY_DOWN) \
+		&& k.action == MLX_PRESS)
 			can_move(game->player, game, DOWN);
-		if ((k.key == MLX_KEY_A || k.key == MLX_KEY_LEFT) && k.action == MLX_PRESS)
+		if ((k.key == MLX_KEY_A || k.key == MLX_KEY_LEFT) \
+		&& k.action == MLX_PRESS)
 			can_move(game->player, game, LEFT);
-		if ((k.key == MLX_KEY_D || k.key == MLX_KEY_RIGHT) && k.action == MLX_PRESS)
+		if ((k.key == MLX_KEY_D || k.key == MLX_KEY_RIGHT) \
+		&& k.action == MLX_PRESS)
 			can_move(game->player, game, RIGHT);
 		time = mlx_get_time();
 	}
@@ -119,7 +123,7 @@ static void	open_chest(t_game *game)
 		newpos.y = pos->y + dir[i][1];
 		if (game->map[newpos.y][newpos.x] == 'C')
 		{	
-			if (collect(game, game->collectibles, game->map, &newpos) == true)
+			if (collect(game, game->collectibles, &newpos) == true)
 			{	
 				ft_printf("collected = %d\n", game->player->collectibles);
 				break ;
@@ -144,7 +148,7 @@ static void	attack(t_game *game)
 		newpos.y = pos->y + dir[i][1];
 		if (game->map[newpos.y][newpos.x] == 'K')
 		{
-			if (kill(game, game->enemies, game->map, &newpos) == true)
+			if (kill(game->enemies, &newpos) == true)
 				break ;
 		}
 		i++;

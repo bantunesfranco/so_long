@@ -28,7 +28,7 @@ uint8_t	*split_text(mlx_texture_t *text, uint32_t xy[2], uint32_t wh[2])
 	if (!pixels)
 		ft_error("so_long", ENOMEM);
 	y = -1;
-	while (++y < wh[1])
+	while ((uint32_t)++y < wh[1])
 	{
 		pixelx = &text->pixels[((xy[1] + y) * text->width + xy[0]) * BPP];
 		pixeli = &pixels[y * wh[0] * BPP];

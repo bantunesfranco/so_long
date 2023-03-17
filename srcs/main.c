@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 12:27:50 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 11:54:36 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ void	update_game(void *param)
 int	main(int argc, char **argv)
 {
 	t_game			game;
-	mlx_t			*mlx;
 
+	if (argc != 2)
+	{
+		ft_putendl_fd("Incorrect number of arguments", 2);
+		exit(22);
+	}
 	init_game(&game, argv);
 	render_map(&game, game.map);
 	mlx_loop_hook(game.mlx, update_game, (void *)&game);

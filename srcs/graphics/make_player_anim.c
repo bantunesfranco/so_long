@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 14:25:55 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 14:27:13 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 11:47:59 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ static void	make_frames(uint8_t **arr, mlx_texture_t *text, int x, int y)
 	}
 }
 
-uint8_t	**load_player_anim(t_game *game, mlx_texture_t *txt, int frames, int y)
+uint8_t	**load_player_anim(mlx_texture_t *txt, int frames, int y)
 {
-	mlx_texture_t		*text;
 	uint8_t				**sprites;
 	int					i;
 	int					x;

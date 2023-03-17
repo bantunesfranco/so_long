@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 16:20:12 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 11:10:34 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 12:00:58 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	reset_enemies(t_game *game, t_enemy **list)
 	}
 }
 
-static void	reset_collectibles(t_game *game, t_collect **list)
+static void	reset_collectibles(t_collect **list)
 {
 	mlx_image_t		*img;
 	t_collect		*head;
@@ -78,7 +78,7 @@ void	restart_game(t_game *game)
 	ft_printf("RESTART!!!!!!!!");
 	reset_player(game, game->player);
 	reset_enemies(game, game->enemies);
-	reset_collectibles(game, game->collectibles);
+	reset_collectibles(game->collectibles);
 	// exit_game(game);
 	return ;
 }

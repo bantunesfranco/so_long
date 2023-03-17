@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 14:37:21 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 16:10:03 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 11:47:29 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	update_enemy(t_enemy **list)
 void	render_collectibles(t_game *game, int x, int y)
 {
 	t_collect		*head;
-	const uint32_t	xy[2] = {SIZE * 3, SIZE};
-	const uint32_t	wh[2] = {SIZE, SIZE};
 
 	head = *game->collectibles;
 	while (head)
@@ -61,8 +59,6 @@ void	render_collectibles(t_game *game, int x, int y)
 void	render_enemies(t_game *game, int x, int y)
 {
 	t_enemy			*head;
-	const uint32_t	xy[2] = {0, 0};
-	const uint32_t	wh[2] = {48, 48};
 
 	head = *game->enemies;
 	while (head)

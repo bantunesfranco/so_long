@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:38:55 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/10 16:30:53 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 11:54:52 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ bool	can_exit(char **map, t_map *info, t_pos *pos)
 	rear = 0;
 	info->queue = (t_pos *)ft_calloc(info->size, sizeof(t_pos));
 	if (!info->queue)
-		return (free(visited), false);
+		return (free(info->visited), false);
 	queue = info->queue;
 	info->visited = alloc_visited(info);
 	if (!info->visited)

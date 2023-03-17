@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 16:25:32 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 12:00:20 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,19 @@ static void	add_enemy(mlx_t *mlx, t_enemy **list, \
 static void	init_pois(t_game *game, char **map)
 {
 	t_pos			pos;
-	// uint8_t			**sprites;
-	mlx_texture_t	*text;
+	uint8_t			**sprites;
 	uint8_t			**sprites2;
+	mlx_texture_t	*text;
+	mlx_texture_t	*text2;
 
-	text = mlx_load_png("./sprites/ghost48.png");
-	// sprites = ft_calloc(1, sizeof(mlx_texture_t *));
+	sprites = ft_calloc(1, sizeof(uint8_t *));
 	sprites2 = ft_calloc(1, sizeof(uint8_t *));
-	if (!sprites2 || !sprites2)
+	if (!sprites || !sprites2)
 		ft_error("so_long", ENOMEM);
-	// sprites = load_poi_anim(game, text, 12, 0);
-	sprites2 = load_poi_anim(game, text, 12, 0);
+	text = mlx_load_png("./sprites/props.png");
+	text2 = mlx_load_png("./sprites/ghost48.png");
+	sprites = load_poi_anim(text, 2, 0);
+	sprites2 = load_poi_anim(text2, 12, 0);
 	pos.y = -1;
 	while (++pos.y < game->map_info->rows)
 	{
@@ -82,7 +84,7 @@ static void	init_pois(t_game *game, char **map)
 		while (++pos.x < game->map_info->cols)
 		{
 			if (map[pos.y][pos.x] == 'C')
-				add_collect(game->mlx, game->collectibles, sprites2, &pos);
+				add_collect(game->mlx, game->collectibles, sprites, &pos);
 			if (map[pos.y][pos.x] == 'K')
 				add_enemy(game->mlx, game->enemies, sprites2, &pos);
 		}
@@ -93,8 +95,6 @@ static void	init_pois(t_game *game, char **map)
 static void	init_player(t_game *game)
 {
 	t_player	*player;
-	t_pos		*start_pos;
-	t_pos		*pos;
 
 	player = ft_calloc(1, sizeof(t_player));
 	if (!player)

@@ -6,13 +6,13 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 14:15:20 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 14:50:52 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 11:58:59 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 
-bool	collect(t_game *game, t_collect **list, char **map, t_pos *pos)
+bool	collect(t_game *game, t_collect **list, t_pos *pos)
 {
 	t_collect	*collect;
 
@@ -32,7 +32,7 @@ bool	collect(t_game *game, t_collect **list, char **map, t_pos *pos)
 	return (false);
 }
 
-bool	kill(t_game *game, t_enemy **list, char **map, t_pos *pos)
+bool	kill(t_enemy **list, t_pos *pos)
 {
 	t_enemy	*enemy;
 
@@ -55,7 +55,7 @@ bool	kill(t_game *game, t_enemy **list, char **map, t_pos *pos)
 bool	take_damage(t_player *player, t_enemy **list)
 {
 	t_enemy			*enemy;
-	static t_pos	pos[1] = {-1, -1};
+	static t_pos	pos[1] = {{-1, -1}};
 
 	enemy = *list;
 	if (pos->x == player->pos->x && pos->y == player->pos->y)

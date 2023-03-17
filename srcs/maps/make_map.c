@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:24:44 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/10 13:54:32 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 11:57:33 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static int	get_nb_lines(char *file)
 	int		fd;
 	int		lines;
 	char	*line;
-	int		len;
 
 	lines = 0;
 	fd = open(file, O_RDONLY);
@@ -72,7 +71,6 @@ static char	**get_map(char *file, t_map *info)
 	int		fd;
 	char	**map;
 	char	*line;
-	char	*tmp;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)

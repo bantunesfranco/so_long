@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/24 15:48:43 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 17:36:34 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 11:51:41 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	render_player(t_game *game, t_player *player)
 	sprites = ft_calloc(5, sizeof(uint8_t **));
 	if (!sprites)
 		ft_error("so_long", ENOMEM);
-	sprites[0] = load_player_anim(game, texture, 16, 4);
-	sprites[1] = load_player_anim(game, texture, 16, 3);
-	sprites[2] = load_player_anim(game, texture, 16, 8);
-	sprites[3] = load_player_anim(game, texture, 16, 6);
-	sprites[4] = load_player_anim(game, texture, 16, 7);
+	sprites[0] = load_player_anim(texture, 16, 4);
+	sprites[1] = load_player_anim(texture, 16, 3);
+	sprites[2] = load_player_anim(texture, 16, 8);
+	sprites[3] = load_player_anim(texture, 16, 6);
+	sprites[4] = load_player_anim(texture, 16, 7);
 	player->sprites = sprites;
 	img->pixels = player->sprites[0][0];
 	mlx_image_to_window(game->mlx, img, \

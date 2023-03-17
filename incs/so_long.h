@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 16:25:55 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 11:58:39 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,9 @@ void			render_map(t_game *game, char **map);
 void			render_player(t_game *game, t_player *player);
 
 /* pixel buffers*/
-uint8_t			**load_poi_anim(t_game *game, mlx_texture_t *txt, \
-											int frames, int y);
-uint8_t			**load_player_anim(t_game *game, mlx_texture_t *txt, \
+uint8_t			**load_poi_anim(mlx_texture_t *txt, \
+								int frames, int y);
+uint8_t			**load_player_anim(mlx_texture_t *txt, \
 								int frames, int y);
 uint8_t			*split_text(mlx_texture_t *text, uint32_t xy[2], \
 							uint32_t wh[2]);
@@ -137,8 +137,8 @@ void			play_anim(t_player *player, uint8_t **arr, int frames);
 
 /* game interations */
 void			interactions(mlx_key_data_t k, void *param);
-bool			collect(t_game *game, t_collect **list, char **map, t_pos *pos);
-bool			kill(t_game *game, t_enemy **list, char **map, t_pos *pos);
+bool			collect(t_game *game, t_collect **list, t_pos *pos);
+bool			kill(t_enemy **list, t_pos *pos);
 
 /* update game state */
 bool			take_damage(t_player *player, t_enemy **list);

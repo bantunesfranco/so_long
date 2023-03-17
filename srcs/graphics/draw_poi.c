@@ -54,7 +54,7 @@ void	render_collectibles(t_game *game, int x, int y)
 	}
 	mlx_image_to_window(game->mlx, head->img, \
 	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
-	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2 - 20);
+	SIZE * (y - 1) + (game->height - game->map_info->rows * SIZE) / 2 - 20);
 	// mlx_set_instance_depth(&img->instances[0], 3);
 }
 

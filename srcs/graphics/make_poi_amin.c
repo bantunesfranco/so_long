@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 14:27:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 11:52:15 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 12:24:00 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	make_frames(uint8_t **arr, mlx_texture_t *text, int x, int y)
 {
 	const uint32_t		xy[2] = {SIZE * x, SIZE * y};
-	const uint32_t		wh[2] = {SIZE, 48};
+	const uint32_t		wh[2] = {SIZE, SIZE * 2};
 
 	arr[x] = split_text(text, (uint32_t *)xy, (uint32_t *)wh);
 	if (!arr[x])

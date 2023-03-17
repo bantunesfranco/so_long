@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 12:00:20 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 12:22:19 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	add_collect(mlx_t *mlx, t_collect **list, \
 	collect->pos->y = pos->y;
 	collect->collected = false;
 	collect->next = NULL;
-	collect->img = mlx_new_image(mlx, 32, 48);
+	collect->img = mlx_new_image(mlx, SIZE, SIZE * 2);
 	collect->sprites = arr;
 	if (!*list)
 		collect_add_back(list, collect);
@@ -76,7 +76,7 @@ static void	init_pois(t_game *game, char **map)
 	text = mlx_load_png("./sprites/props.png");
 	text2 = mlx_load_png("./sprites/ghost48.png");
 	sprites = load_poi_anim(text, 2, 0);
-	sprites2 = load_poi_anim(text2, 12, 0);
+	sprites2 = load_poi_anim(text2, 6, 0);
 	pos.y = -1;
 	while (++pos.y < game->map_info->rows)
 	{

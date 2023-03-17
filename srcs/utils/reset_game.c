@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 16:20:12 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 17:55:22 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 11:10:34 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static void	reset_enemies(t_game *game, t_enemy **list)
 	{
 		img = head->img;
 		pos = head->start_pos;
-		ft_printf("%d %d\n", head->pos->x, head->pos->y);
 		ft_memcpy(head->pos, pos, sizeof(t_pos *));
 		img->enabled = false;
 		img->pixels = head->sprites[0];

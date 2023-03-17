@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 13:08:34 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 15:23:45 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ void	update_game(void *param)
 
 	game = param;
 	pos = game->player->pos;
-	update_enemy(game->enemies);
-	update_player(game->player);
-	update_player_stats(game, game->player);
 	if ((game->player->status == CAN_EXIT && game->map[pos->y][pos->x] == 'E') \
 	|| game->player->status == DEAD)
 		end_game(game);
+	update_enemy(game->enemies);
+	update_player(game->player);
+	update_player_stats(game, game->player);
+	render_ui(game, game->player);
 }
 
 int	main(int argc, char **argv)

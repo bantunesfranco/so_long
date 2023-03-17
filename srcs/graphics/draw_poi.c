@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 14:37:21 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 12:28:24 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 15:58:54 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ void	render_enemies(t_game *game, int x, int y)
 	mlx_image_to_window(game->mlx, head->img, \
 	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
 	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2 - 20);
-	mlx_set_instance_depth(&head->img->instances[0], 3);
+	mlx_set_instance_depth(&head->img->instances[0], 4);
 }

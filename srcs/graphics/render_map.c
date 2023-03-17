@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 15:04:27 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/16 16:09:40 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 15:39:20 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	render_exit(t_game *game, int x, int y)
 	(uint32_t *)xy, (uint32_t *)wh);
 	mlx_image_to_window(game->mlx, img, \
 	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
-	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2 + 5);
-	mlx_set_instance_depth(&img->instances[0], 2);
+	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2);
+	mlx_set_instance_depth(&img->instances[0], 1);
 }
 
 void	render_floor(t_game *game, int x, int y)
@@ -41,7 +41,7 @@ void	render_floor(t_game *game, int x, int y)
 	mlx_image_to_window(game->mlx, img, \
 	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
 	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2 + 5);
-	mlx_set_instance_depth(&img->instances[0], 1);
+	mlx_set_instance_depth(&img->instances[0], 0);
 	mlx_delete_texture(texture);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 15:44:31 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 11:19:18 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 15:31:42 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	render_middle(t_game *game, mlx_texture_t *texture, int x, int y)
 	mlx_image_to_window(game->mlx, img, \
 	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
 	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2);
-	mlx_set_instance_depth(img->instances, 2);
+	mlx_set_instance_depth(img->instances, 1);
 	game->map_tiles[x + game->map_info->cols * y] = img;
 }
 
@@ -50,7 +50,7 @@ static void	render_corners(t_game *game, mlx_texture_t *texture, int x, int y)
 		SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
 		SIZE * y + (game->height - game->map_info->rows * SIZE) / 2);
 	}
-	mlx_set_instance_depth(img->instances, 2);
+	mlx_set_instance_depth(img->instances, 1);
 	game->map_tiles[x + game->map_info->cols * y] = img;
 }
 
@@ -76,7 +76,7 @@ static void	render_leftright(t_game *game, mlx_texture_t *texture, int x, int y)
 		SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
 		SIZE * y + (game->height - game->map_info->rows * SIZE) / 2);
 	}
-	mlx_set_instance_depth(img->instances, 2);
+	mlx_set_instance_depth(img->instances, 1);
 	game->map_tiles[x + game->map_info->cols * y] = img;
 }
 
@@ -102,7 +102,7 @@ static void	render_topbot(t_game *game, mlx_texture_t *texture, int x, int y)
 		SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
 		SIZE * y + (game->height - game->map_info->rows * SIZE) / 2);
 	}
-	mlx_set_instance_depth(img->instances, 2);
+	mlx_set_instance_depth(img->instances, 1);
 	game->map_tiles[x + game->map_info->cols * y] = img;
 }
 

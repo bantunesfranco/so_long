@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 11:58:39 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 13:31:10 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@
 typedef enum e_status
 {
 	ACTIVE = 0,
-	CAN_EXIT = 1,
-	END = 2,
-	LOCKED = 3,
-	RESTART = 4,
+	INACTIVE = 1,
+	ALIVE = 2,
+	DEAD = 3,
+	CAN_EXIT = 4,
+	LOCKED = 5,
+	RESTART = 6,
 }	t_status;
 
 typedef enum e_dir
@@ -74,6 +76,7 @@ typedef struct s_player
 	int32_t			moves;
 	t_pos			*pos;
 	t_pos			*start_pos;
+	t_status		status;
 }	t_player;
 
 typedef struct s_map
@@ -120,8 +123,8 @@ void			render_map(t_game *game, char **map);
 void			render_player(t_game *game, t_player *player);
 
 /* pixel buffers*/
-uint8_t			**load_poi_anim(mlx_texture_t *txt, \
-								int frames, int y);
+uint8_t			**load_poi_anim(mlx_texture_t *txt, int frames, \
+								int y, char type);
 uint8_t			**load_player_anim(mlx_texture_t *txt, \
 								int frames, int y);
 uint8_t			*split_text(mlx_texture_t *text, uint32_t xy[2], \
@@ -145,6 +148,7 @@ bool			take_damage(t_player *player, t_enemy **list);
 void			update_player_stats(t_game *game, t_player *player);
 void			exit_game(t_game *game);
 void			restart_game(t_game *game);
+void			end_game(t_game *game);
 
 /* cleanup */
 void			free_info(t_map *info);

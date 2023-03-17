@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 14:15:20 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 11:58:59 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 13:02:51 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,13 @@ void	update_player_stats(t_game *game, t_player *player)
 	if (take_damage(player, game->enemies) == true)
 	{
 		if (player->lives >= 1)
-			ft_printf("Damage\n");
+			ft_printf("Damage\n"); /* Play dmg anim */
 		else
-			ft_printf("Dead\n");
+		{
+			/* Pay death anim */
+			player->status = DEAD;
+		}
 	}
+	if (player->collectibles == game->map_info->collectible_count)
+		player->status = CAN_EXIT;
 }

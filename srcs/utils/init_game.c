@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 12:22:19 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 13:31:33 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,15 @@ static void	init_pois(t_game *game, char **map)
 	uint8_t			**sprites;
 	uint8_t			**sprites2;
 	mlx_texture_t	*text;
-	mlx_texture_t	*text2;
 
 	sprites = ft_calloc(1, sizeof(uint8_t *));
 	sprites2 = ft_calloc(1, sizeof(uint8_t *));
 	if (!sprites || !sprites2)
 		ft_error("so_long", ENOMEM);
 	text = mlx_load_png("./sprites/props.png");
-	text2 = mlx_load_png("./sprites/ghost48.png");
-	sprites = load_poi_anim(text, 2, 0);
-	sprites2 = load_poi_anim(text2, 6, 0);
+	sprites = load_poi_anim(text, 2, 0, 'C');
+	text = mlx_load_png("./sprites/ghost48.png");
+	sprites2 = load_poi_anim(text, 6, 0, 'K');
 	pos.y = -1;
 	while (++pos.y < game->map_info->rows)
 	{
@@ -89,7 +88,6 @@ static void	init_pois(t_game *game, char **map)
 				add_enemy(game->mlx, game->enemies, sprites2, &pos);
 		}
 	}
-	mlx_delete_texture(text);
 }
 
 static void	init_player(t_game *game)

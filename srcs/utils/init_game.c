@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 16:52:41 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 17:44:23 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ void	init_game(t_game *game, char **argv)
 {
 	init_player(game);
 	game->map = map_parser(argv[1], game);
-	game->width = SIZE * game->map_info->cols + 500;
-	game->height = SIZE * game->map_info->rows + 500;
+	game->width = SIZE * game->map_info->cols + PAD;
+	game->height = SIZE * game->map_info->rows + PAD;
 	game->mlx = mlx_init(game->width, game->height, "so_long", true);
 	if (!game->mlx)
 		exit(EXIT_FAILURE);

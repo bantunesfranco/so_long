@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 15:10:49 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 17:44:50 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <MLX42/MLX42.h>
 
 # define SIZE 32
+# define PAD 200
 
 typedef enum e_status
 {

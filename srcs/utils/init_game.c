@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 16:00:16 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/17 16:52:41 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	add_enemy(mlx_t *mlx, t_enemy **list, \
 	ft_memcpy(enemy->pos, enemy->start_pos, sizeof(t_pos *));
 	enemy->killed = false;
 	enemy->next = NULL;
-	enemy->img = mlx_new_image(mlx, 48, 48);
+	enemy->img = mlx_new_image(mlx, 32, 48);
 	enemy->dir = RIGHT;
 	enemy->sprites = arr;
 	if (!*list)

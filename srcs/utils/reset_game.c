@@ -56,12 +56,29 @@ static void	reset_enemies(t_game *game, t_enemy **list)
 	}
 }
 
+static void	reset_collectibles(t_game *game, t_collect **list)
+{
+	mlx_image_t		*img;
+	t_collect		*head;
+
+	head = *list;
+	while (head)
+	{
+		img = head->img;
+		img->enabled = false;
+		img->pixels = head->sprites[0];
+		head->collected = false;
+		img->enabled = true;
+		head = head->next;
+	}
+}
+
 void	restart_game(t_game *game)
 {
 	ft_printf("RESTART!!!!!!!!");
 	reset_player(game, game->player);
 	reset_enemies(game, game->enemies);
-	// reset_collectibles(game->collectibles);
+	reset_collectibles(game, game->collectibles);
 	// exit_game(game);
 	return ;
 }

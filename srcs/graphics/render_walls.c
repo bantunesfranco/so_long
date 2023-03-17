@@ -22,7 +22,7 @@ static void	render_middle(t_game *game, mlx_texture_t *texture, int x, int y)
 	(uint32_t *)xy, (uint32_t *)wh);
 	mlx_image_to_window(game->mlx, img, \
 	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
-	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2);
+	SIZE * (y - 1) + (game->height - game->map_info->rows * SIZE) / 2);
 	mlx_set_instance_depth(img->instances, 2);
 	game->map_tiles[x + game->map_info->cols * y] = img;
 }

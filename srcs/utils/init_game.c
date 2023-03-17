@@ -27,7 +27,7 @@ static void	add_collect(mlx_t *mlx, t_collect **list, \
 	collect->pos->y = pos->y;
 	collect->collected = false;
 	collect->next = NULL;
-	collect->img = mlx_new_image(mlx, 48, 48);
+	collect->img = mlx_new_image(mlx, 32, 48);
 	collect->sprites = arr;
 	if (!*list)
 		collect_add_back(list, collect);

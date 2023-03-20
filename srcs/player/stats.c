@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 14:15:20 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 16:00:58 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/20 17:55:02 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,5 @@ void	update_player_stats(t_game *game, t_player *player)
 		}
 	}
 	if (player->collectibles == game->map_info->collectible_count)
-		player->status = CAN_EXIT;
+		game->status = CAN_EXIT;
 }

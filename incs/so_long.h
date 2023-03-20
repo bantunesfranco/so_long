@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/20 11:29:13 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/20 18:03:17 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,19 @@
 # define SIZE 32
 # define PADX 640
 # define PADY 160
+# define IDLE 6
 
 typedef enum e_status
 {
-	ACTIVE = 0,
-	INACTIVE = 1,
-	ALIVE = 2,
-	DEAD = 3,
-	CAN_EXIT = 4,
-	LOCKED = 5,
-	RESTART = 6,
+	ALIVE = 0,
+	DEAD = 1,
+	WALK = 2,
+	ATK = 3,
+	DMG = 4,
+	CAN_EXIT = 5,
+	LOCKED = 6,
+	UNLOCKED = 7,
+	RESTART = 8,
 }	t_status;
 
 typedef enum e_dir
@@ -108,7 +111,6 @@ typedef struct s_game
 	t_status	status;
 }	t_game;
 
-
 /* init game*/
 void			init_game(t_game *game, char **argv);
 void			enemy_add_back(t_enemy **lst, t_enemy *new);
@@ -139,7 +141,7 @@ void			update_player(t_player *player);
 void			render_enemies(t_game *game, int x, int y);
 void			update_enemy(t_enemy **list);
 void			render_collectibles(t_game *game, int x, int y);
-void			play_anim(t_player *player, uint8_t **arr, int frames);
+void			update_anim(t_game *game, t_player *player);
 
 /* game interations */
 void			interactions(mlx_key_data_t k, void *param);
@@ -152,6 +154,7 @@ void			update_player_stats(t_game *game, t_player *player);
 void			exit_game(t_game *game);
 void			restart_game(t_game *game);
 void			end_game(t_game *game);
+float			delay(t_player *player);
 
 /* cleanup */
 void			free_info(t_map *info);

@@ -75,7 +75,7 @@ fclean: clean
 re: fclean all
 
 git:
-	git commit -m "auto commit"
+	git commit
 	git push
 
 submodules:

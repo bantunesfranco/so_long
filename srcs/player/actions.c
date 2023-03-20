@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/20 09:51:07 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 12:02:45 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/20 12:04:50 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ static void	attack(t_game *game)
 		}
 		i++;
 	}
-	// play_anim(game->player, game->player->sprites[2], 8);
+	play_anim(game->player, game->player->sprites[2], 8);
 }
 
 void	interactions(mlx_key_data_t k, void *param)

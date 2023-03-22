@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/20 18:02:14 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/22 10:53:14 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	update_game(void *param)
 {
 	t_game			*game;
 	t_pos			*pos;
-	// static double	time;
+	static double	time;
 
 	game = param;
 	pos = game->player->pos;
@@ -39,11 +39,11 @@ void	update_game(void *param)
 	update_enemy(game->enemies);
 	if (game->status != LOCKED)
 		update_player(game->player);
-	// else if (mlx_get_time() - time > delay(game->player))
-	// {
-	// 	update_anim(game, game->player);
-	// 	time = mlx_get_time();
-	// }
+	else if (mlx_get_time() - time > delay(game->player))
+	{
+		update_anim(game, game->player);
+		time = mlx_get_time();
+	}
 	update_player_stats(game, game->player);
 	render_ui(game, game->player);
 }

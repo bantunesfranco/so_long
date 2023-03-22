@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/20 14:35:06 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/22 17:23:59 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,9 @@ static void	init_player(t_game *game)
 	if (!player->pos)
 		ft_error("so_long", ENOMEM);
 	player->lives = 3;
-	player->dir = RIGHT;
+	player->dir = 3;
+	player->move_dir = 3;
 	player->collectibles = 0;
-	player->start_pos->x = 0;
-	player->start_pos->y = 0;
 	player->moves = 0;
 	game->player = player;
 }

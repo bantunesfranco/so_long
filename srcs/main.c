@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/22 10:53:14 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/22 16:14:29 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ float	delay(t_player *player)
 	if (player->status == WALK)
 		return (0.05);
 	if (player->status == DMG)
-		return (0.02);
+		return (0.03);
 	if (player->status == DEAD)
 		return (0.05);
 	return (0);
@@ -59,8 +59,8 @@ int	main(int argc, char **argv)
 	}
 	init_game(&game, argv);
 	render_map(&game, game.map);
-	mlx_loop_hook(game.mlx, update_game, (void *)&game);
-	mlx_key_hook(game.mlx, interactions, (void *)&game);
+	mlx_loop_hook(game.mlx, update_game, &game);
+	mlx_key_hook(game.mlx, interactions, &game);
 	mlx_loop(game.mlx);
 	exit_game(&game);
 }

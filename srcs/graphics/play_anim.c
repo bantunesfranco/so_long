@@ -6,28 +6,66 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 11:21:58 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/20 18:02:31 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/22 18:04:19 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 
-void	play_anim(t_player *player, uint8_t **arr, int i)
+static void	move_sprite(t_game *game, t_player *player, t_dir move_dir)
 {
-	int		dir;
+	int			step;
+	static int	moved = 0;
+
+	step = 1;
+	if (move_dir == UP || move_dir == LEFT)
+		step = -1;
+	if (move_dir == LEFT || move_dir == RIGHT)
+	{
+		player->img->instances[0].x += (step * 4);
+		player->dir = RIGHT;
+		if (step == -1)
+			player->dir = LEFT;
+	}
+	else if (move_dir == UP || move_dir == DOWN)
+		player->img->instances[0].y += (step * 4);
+	moved += 4;
+	if (moved == 32)
+	{
+		moved = 0;
+		game->status = UNLOCKED;
+	}
+	ft_printf("%d %d %d\n", player->pos->x, player->pos->y, player->move_dir);
+}
+
+void	play_anim(t_game *game, t_player *player, uint8_t **arr, int i)
+{
+	int			dir;
 
 	if (player->dir == LEFT)
 		dir = 8;
 	else
 		dir = 0;
 	player->img->pixels = arr[i + dir];
+	if (player->status == WALK)
+	{
+		move_sprite(game, player, player->move_dir);
+		if (player->move_dir == UP && !i)
+			game->player->pos->y -= 1;
+		if (player->move_dir == DOWN && !i)
+			game->player->pos->y += 1;
+		if (player->move_dir == LEFT && !i)
+			game->player->pos->x -= 1;
+		if (player->move_dir == RIGHT && !i)
+			game->player->pos->x += 1;
+	}
 }
 
 void	update_anim(t_game *game, t_player *player)
 {
 	uint8_t		**sprites;
 	int			frames;
-	static int	i;
+	static int	i = 0;
 
 	frames = 8;
 	if (player->status == WALK)
@@ -43,7 +81,7 @@ void	update_anim(t_game *game, t_player *player)
 		sprites = player->sprites[4];
 	else
 		return ;
-	play_anim(player, sprites, i);
+	play_anim(game, player, sprites, i);
 	i++;
 	if (i == frames)
 	{

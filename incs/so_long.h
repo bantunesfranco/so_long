@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/20 18:03:17 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/22 17:25:51 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # define SIZE 32
 # define PADX 640
 # define PADY 160
-# define IDLE 6
 
 typedef enum e_status
 {
@@ -75,8 +74,9 @@ typedef struct s_player
 {
 	mlx_image_t		*img;
 	uint8_t			***sprites;
-	int32_t			dir;
-	int				lives;
+	t_dir			dir;
+	t_dir			move_dir;
+	int32_t			lives;
 	int32_t			collectibles;
 	int32_t			moves;
 	t_pos			*pos;

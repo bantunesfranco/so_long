@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 16:20:12 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/20 14:19:48 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/22 17:40:59 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	reset_player(t_player *player)
 	ft_memcpy(player->pos, player->start_pos, sizeof(t_pos *));
 	img->enabled = false;
 	img->pixels = player->sprites[0][0];
-	img->instances[0].x = SIZE * pos->x + PADX / 8;
-	img->instances[0].y = SIZE * (pos->y - 1) + PADY / 2 + 10;
+	img->instances[0].x = SIZE * pos->x + PADX / 8 - 5;
+	img->instances[0].y = SIZE * (pos->y - 1) + PADY / 2 + 5;
 	player->lives = 3;
 	player->collectibles = 0;
 	img->enabled = true;

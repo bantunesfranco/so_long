@@ -26,9 +26,6 @@ SRCS = main.c\
 		maps/make_map.c maps/validate_map.c maps/validate_path.c\
 		player/actions.c player/stats.c 
 
-# SRCS = ${addprefix ${DIR_S}/,${SOURCES}}
-# SRCS = ${shell find srcs -type f -name "*.c" }
-
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
 
 ifeq ($(OS), Windows_NT)
@@ -45,10 +42,14 @@ else
 	endif
 endif
 
+all: ${NAME}
 
-${NAME}: ${OBJS} ${DIR_I}/${NAME}.h
+${MLX}:
 	@cmake MLX42 -B MLX42/build
 	@make -C MLX42/build -j4
+
+${NAME}: ${MLX} ${OBJS} ${DIR_I}/${NAME}.h
+
 	@make -s -C libft
 	@echo "${BLUE}Compiling ${NAME}${END}"
 	@${CC} ${CFLAGS} ${FW_FLAGS} ${LIBFT} ${MLX} ${OBJS} -o ${NAME} 
@@ -61,12 +62,11 @@ ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
 
 bonus: ${NAME}
 
-all: ${NAME}
 
 clean:
-	@make -s -C libft
+	@make clean -s -C libft 
 	@echo "${RED}Removing MLX42${END}"
-# @rm -rf MLX42/build
+	@rm -rf MLX42/build
 	@echo "${RED}Removing objs${END}"
 	@rm -rf obj
 	@echo "${GREEN}Done!${END}"

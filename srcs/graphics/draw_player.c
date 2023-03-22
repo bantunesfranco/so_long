@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/24 15:48:43 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/20 11:30:32 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/22 17:40:49 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void	render_player(t_game *game, t_player *player)
 	player->sprites = sprites;
 	img->pixels = player->sprites[0][0];
 	mlx_image_to_window(game->mlx, img, \
-	SIZE * pos->x + PADX / 8 - 10, SIZE * (pos->y - 1) + PADY / 2 + 10);
+	SIZE * pos->x + PADX / 8 - 5, SIZE * (pos->y - 1) + PADY / 2 + 5);
 	mlx_set_instance_depth(&player->img->instances[0], 5);
 }

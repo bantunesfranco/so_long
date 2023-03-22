@@ -6,47 +6,23 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/20 09:51:07 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/20 18:04:10 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/22 17:53:44 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 #include <MLX42/MLX42_Input.h>
 
-static bool	is_valid_coord(int32_t x, int32_t y, t_map *info, char **map)
+static bool	is_valid_coord(int32_t x, int32_t y, t_game *game, char **map)
 {
-	if (!(x >= 0 && x < info->cols - 1 && y > 0 && y <= info->rows - 1))
+	if (!(x >= 0 && x < game->map_info->cols - 1 \
+	&& y > 0 && y <= game->map_info->rows - 1))
 		return (false);
 	if (map[y][x] == '1')
 		return (false);
-	return (true);
-}
-
-static void	move_sprite(t_game *game, t_player *player, char xy, int step)
-{
-	int		i;
-
-	i = 0;
-	if (xy == 'x')
-		player->pos->x += step;
-	else if (xy == 'y')
-		player->pos->y += step;
-	while (i < 32)
-	{
-		if (xy == 'x')
-		{
-			player->img->instances[0].x += step;
-			if (step == -1)
-				player->dir = 2;
-			else
-				player->dir = 3;
-		}
-		else if (xy == 'y')
-			player->img->instances[0].y += step;
-		i++;
-	}
-	player->status = WALK;
+	game->player->status = WALK;
 	game->status = LOCKED;
+	return (true);
 }
 
 static void	can_move(t_player *player, t_game *game, int32_t dir)
@@ -58,23 +34,23 @@ static void	can_move(t_player *player, t_game *game, int32_t dir)
 	y = player->pos->y;
 	if (dir == UP && game->status != LOCKED)
 	{
-		if (is_valid_coord(x, y - 1, game->map_info, game->map) == true)
-			move_sprite(game, player, 'y', -1);
+		if (is_valid_coord(x, y - 1, game, game->map) == true)
+			player->move_dir = UP;
 	}
 	else if (dir == DOWN && game->status != LOCKED)
 	{
-		if (is_valid_coord(x, y + 1, game->map_info, game->map) == true)
-			move_sprite(game, player, 'y', 1);
+		if (is_valid_coord(x, y + 1, game, game->map) == true)
+			player->move_dir = DOWN;
 	}
 	else if (dir == LEFT && game->status != LOCKED)
 	{
-		if (is_valid_coord(x - 1, y, game->map_info, game->map) == true)
-			move_sprite(game, player, 'x', -1);
+		if (is_valid_coord(x - 1, y, game, game->map) == true)
+			player->move_dir = LEFT;
 	}
 	else if (dir == RIGHT && game->status != LOCKED)
 	{
-		if (is_valid_coord(x + 1, y, game->map_info, game->map) == true)
-			move_sprite(game, player, 'x', 1);
+		if (is_valid_coord(x + 1, y, game, game->map) == true)
+			player->move_dir = RIGHT;
 	}
 }
 
@@ -163,10 +139,10 @@ void	interactions(mlx_key_data_t k, void *param)
 	mlx = game->mlx;
 	if (game->status != LOCKED)
 	{
-		if (k.key == MLX_KEY_E && k.action == MLX_PRESS)
-			open_chest(game);
-		else if (k.key == MLX_KEY_SPACE && k.action == MLX_PRESS)
+		if (k.key == MLX_KEY_SPACE && k.action == MLX_PRESS)
 			attack(game);
+		else if (k.key == MLX_KEY_E && k.action == MLX_PRESS)
+			open_chest(game);
 		else if (k.key == MLX_KEY_R && k.action == MLX_PRESS)
 			restart_game(game);
 		else if (k.key == MLX_KEY_ESCAPE && k.action == MLX_PRESS)

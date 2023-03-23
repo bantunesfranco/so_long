@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 15:44:31 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/20 11:31:15 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/23 11:50:15 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	render_middle(t_game *game, mlx_texture_t *texture, int x, int y)
 	img = mlx_texture_area_to_image(game->mlx, texture, \
 	(uint32_t *)xy, (uint32_t *)wh);
 	mlx_image_to_window(game->mlx, img, \
-	SIZE * x + PADX / 8, SIZE * y + PADY / 2);
+	SIZE * x + PADX / 8, SIZE * y + PADY / 2 - 5);
 	mlx_set_instance_depth(img->instances, 1);
 	game->map_tiles[x + game->map_info->cols * y] = img;
 }

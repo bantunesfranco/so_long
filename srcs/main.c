@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/22 16:14:29 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/23 12:46:42 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ float	delay(t_player *player)
 	if (player->status == WALK)
 		return (0.05);
 	if (player->status == DMG)
-		return (0.03);
+		return (0.1);
 	if (player->status == DEAD)
 		return (0.05);
 	return (0);
@@ -33,9 +33,6 @@ void	update_game(void *param)
 
 	game = param;
 	pos = game->player->pos;
-	if ((game->status == CAN_EXIT && game->map[pos->y][pos->x] == 'E') \
-	|| game->player->status == DEAD)
-		end_game(game);
 	update_enemy(game->enemies);
 	if (game->status != LOCKED)
 		update_player(game->player);
@@ -43,6 +40,9 @@ void	update_game(void *param)
 	{
 		update_anim(game, game->player);
 		time = mlx_get_time();
+		if ((game->exit_status == true && game->map[pos->y][pos->x] == 'E') \
+		|| game->player->status == DEAD)
+			end_game(game);
 	}
 	update_player_stats(game, game->player);
 	render_ui(game, game->player);

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/22 17:23:59 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/23 12:01:05 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@ void	init_game(t_game *game, char **argv)
 	if (!game->map_tiles)
 		ft_error("so_long", ENOMEM);
 	game->status = UNLOCKED;
+	game->exit_status = false;
 	game->time = 0;
 }

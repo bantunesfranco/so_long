@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/22 17:25:51 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/23 12:37:21 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_game
 	mlx_image_t	**map_tiles;
 	double		time;
 	t_status	status;
+	bool		exit_status;
 }	t_game;
 
 /* init game*/

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 14:15:20 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/20 17:55:02 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/23 12:14:07 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ bool	take_damage(t_player *player, t_enemy **list)
 		if (enemy->killed == false \
 		&& player->pos->x == enemy->pos->x && player->pos->y == enemy->pos->y)
 		{
-			ft_printf("%d\n", player->lives);
 			player->lives -= 1;
-			ft_printf("%d\n", player->lives);
 			pos->x = player->pos->x;
 			pos->y = player->pos->y;
 			return (true);
@@ -82,13 +80,11 @@ void	update_player_stats(t_game *game, t_player *player)
 	if (take_damage(player, game->enemies) == true)
 	{
 		if (player->lives >= 1)
-			ft_printf("Damage\n"); /* Play dmg anim */
+			// player->status = DMG;
+			ft_printf("-1\n");
 		else
-		{
-			/* Pay death anim */
 			player->status = DEAD;
-		}
 	}
 	if (player->collectibles == game->map_info->collectible_count)
-		game->status = CAN_EXIT;
+		game->exit_status = true;
 }

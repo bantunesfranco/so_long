@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/23 12:46:42 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/23 16:56:03 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ void	update_game(void *param)
 	{
 		update_anim(game, game->player);
 		time = mlx_get_time();
-		if ((game->exit_status == true && game->map[pos->y][pos->x] == 'E') \
-		|| game->player->status == DEAD)
-			end_game(game);
 	}
 	update_player_stats(game, game->player);
 	render_ui(game, game->player);

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 11:21:58 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/23 12:48:41 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/23 17:53:55 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static void	move_sprite(t_player *player, t_dir move_dir)
 	moved += 4;
 	if (moved == 32)
 		moved = 0;
-	ft_printf("%d %d %d\n", player->pos->x, player->pos->y, player->move_dir);
+	// ft_printf("%d %d %d\n", player->pos->x, player->pos->y, player->move_dir);
 }
 
-void	play_anim(t_player *player, uint8_t **arr, int i)
+static void	play_anim(t_player *player, uint8_t **arr, int i)
 {
 	int			dir;
 
@@ -55,7 +55,22 @@ void	play_anim(t_player *player, uint8_t **arr, int i)
 			player->pos->x -= 1;
 		if (player->move_dir == RIGHT && !i)
 			player->pos->x += 1;
+		if (!i)
+		{
+			player->moves++;
+			ft_printf("moves %d\n", player->moves);
+		}
 	}
+}
+
+static void	end_check(t_game *game, t_player *player, int *i)
+{
+	*i = 0;
+	if (game->player->status == DEAD || (game->exit_status == true \
+	&& game->map[player->pos->y][player->pos->x] == 'E'))
+		end_game(game);
+	game->status = UNLOCKED;
+	player->status = ALIVE;
 }
 
 void	update_anim(t_game *game, t_player *player)
@@ -81,11 +96,5 @@ void	update_anim(t_game *game, t_player *player)
 	play_anim(player, sprites, i);
 	i++;
 	if (i == frames)
-	{
-		i = 0;
-		// if (player->status == DEAD)
-		// 	return ;
-		game->status = UNLOCKED;
-		player->status = ALIVE;
-	}
+		end_check(game, player, &i);
 }

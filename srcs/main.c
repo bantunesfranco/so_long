@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/23 16:56:03 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 11:35:47 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	update_game(void *param)
 	game = param;
 	pos = game->player->pos;
 	update_enemy(game->enemies);
+	update_collectible(game->collectibles);
+	collect(game, game->collectibles, game->player->pos);
 	if (game->status != LOCKED)
 		update_player(game->player);
 	else if (mlx_get_time() - time > delay(game->player))

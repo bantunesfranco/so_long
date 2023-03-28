@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/20 09:51:07 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/22 17:53:44 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 11:35:04 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,31 +81,6 @@ static void	move(mlx_key_data_t k, void *param)
 	}
 }
 
-static void	open_chest(t_game *game)
-{
-	t_pos		*pos;
-	t_pos		newpos;
-	const int	dir[5][2] = {{0, 0}, {0, -1}, {0, 1}, {-1, 0}, {1, 0}};
-	int			i;
-
-	i = 0;
-	pos = game->player->pos;
-	while (i < 5)
-	{
-		newpos.x = pos->x + dir[i][0];
-		newpos.y = pos->y + dir[i][1];
-		if (game->map[newpos.y][newpos.x] == 'C')
-		{	
-			if (collect(game, game->collectibles, &newpos) == true)
-			{	
-				ft_printf("collected = %d\n", game->player->collectibles);
-				break ;
-			}
-		}
-		i++;
-	}
-}
-
 static void	attack(t_game *game)
 {
 	int			i;
@@ -139,10 +114,10 @@ void	interactions(mlx_key_data_t k, void *param)
 	mlx = game->mlx;
 	if (game->status != LOCKED)
 	{
+		// else if (k.key == MLX_KEY_E && k.action == MLX_PRESS)
+		// 	open_chest(game);
 		if (k.key == MLX_KEY_SPACE && k.action == MLX_PRESS)
 			attack(game);
-		else if (k.key == MLX_KEY_E && k.action == MLX_PRESS)
-			open_chest(game);
 		else if (k.key == MLX_KEY_R && k.action == MLX_PRESS)
 			restart_game(game);
 		else if (k.key == MLX_KEY_ESCAPE && k.action == MLX_PRESS)

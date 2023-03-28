@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 15:44:31 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/23 11:50:15 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 11:23:55 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	render_middle(t_game *game, mlx_texture_t *texture, int x, int y)
 {
 	mlx_image_t		*img;
-	const uint32_t	xy[2] = {SIZE * 2, SIZE};
+	const uint32_t	xy[2] = {SIZE * 11, SIZE};
 	const uint32_t	wh[2] = {SIZE, SIZE};
 
 	img = mlx_texture_area_to_image(game->mlx, texture, \
@@ -102,10 +102,8 @@ static void	render_topbot(t_game *game, mlx_texture_t *texture, int x, int y)
 void	render_walls(t_game *game, int x, int y)
 {
 	mlx_texture_t	*spritesheet;
-	mlx_texture_t	*spritesheet2;
 
 	spritesheet = mlx_load_png("./sprites/wall.png");
-	spritesheet2 = mlx_load_png("./sprites/props.png");
 	if (x > 0 && x < game->map_info->cols - 1 \
 	&& (y == 0 || y == game->map_info->rows - 1))
 		render_topbot(game, spritesheet, x, y);
@@ -116,7 +114,6 @@ void	render_walls(t_game *game, int x, int y)
 	&& (y == 0 || y == game->map_info->rows - 1))
 		render_corners(game, spritesheet, x, y);
 	else
-		render_middle(game, spritesheet2, x, y);
+		render_middle(game, spritesheet, x, y);
 	mlx_delete_texture(spritesheet);
-	mlx_delete_texture(spritesheet2);
 }

@@ -6,13 +6,13 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 14:15:20 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/23 12:14:07 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 11:34:03 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 
-bool	collect(t_game *game, t_collect **list, t_pos *pos)
+void	collect(t_game *game, t_collect **list, t_pos *pos)
 {
 	t_collect	*collect;
 
@@ -24,12 +24,11 @@ bool	collect(t_game *game, t_collect **list, t_pos *pos)
 		{
 			collect->collected = true;
 			game->player->collectibles += 1;
-			collect->img->pixels = collect->sprites[1];
-			return (true);
+			collect->img->instances->enabled = false;
+			break ;
 		}
 		collect = collect->next;
 	}
-	return (false);
 }
 
 bool	kill(t_enemy **list, t_pos *pos)

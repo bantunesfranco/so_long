@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/23 12:37:21 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 11:36:05 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,12 @@ void			update_player(t_player *player);
 void			render_enemies(t_game *game, int x, int y);
 void			update_enemy(t_enemy **list);
 void			render_collectibles(t_game *game, int x, int y);
+void			update_collectible(t_collect **list);
 void			update_anim(t_game *game, t_player *player);
 
 /* game interations */
 void			interactions(mlx_key_data_t k, void *param);
-bool			collect(t_game *game, t_collect **list, t_pos *pos);
+void			collect(t_game *game, t_collect **list, t_pos *pos);
 bool			kill(t_enemy **list, t_pos *pos);
 
 /* update game state */

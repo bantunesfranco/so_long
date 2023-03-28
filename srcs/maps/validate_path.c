@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:38:55 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 11:54:52 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 14:04:50 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static bool	look_around(char **map, t_map *info, t_pos *curr, int *rear)
 	{
 		new.y = curr->y + dir[0][i];
 		new.x = curr->x + dir[1][i];
-		// ft_printf("%c (%d, %d)\n", map[new.y][new.x], new.x, new.y);
 		if (is_valid_coord(&new, info, map))
 		{
 			info->queue[*rear].x = new.x;
@@ -77,7 +76,6 @@ static bool	dequeue(char **map, t_map *info, int front, int rear)
 	{
 		curr = info->queue[front];
 		front++;
-		// ft_printf("%c (%d, %d)\n", map[curr.y][curr.x], curr.x, curr.y);
 		if (map[curr.y][curr.x] == 'E')
 			return (free(info->visited), free(info->queue), true);
 		if (look_around(map, info, &curr, &rear) == false)

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 11:21:58 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/23 17:53:55 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 14:06:40 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	move_sprite(t_player *player, t_dir move_dir)
 	moved += 4;
 	if (moved == 32)
 		moved = 0;
-	// ft_printf("%d %d %d\n", player->pos->x, player->pos->y, player->move_dir);
 }
 
 static void	play_anim(t_player *player, uint8_t **arr, int i)

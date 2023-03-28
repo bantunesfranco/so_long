@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 16:20:12 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 14:09:38 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 14:24:56 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	reset_player(t_player *player)
 	img->instances[0].y = SIZE * (pos->y - 1) + PADY / 2 + 5;
 	player->lives = 3;
 	player->collectibles = 0;
+	player->moves = 0;
 	img->enabled = true;
 }
 

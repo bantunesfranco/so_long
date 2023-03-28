@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 14:15:20 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 14:10:40 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 16:04:29 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,16 @@ bool	kill(t_enemy **list, t_pos *pos)
 	return (false);
 }
 
-bool	take_damage(t_player *player, t_enemy **list)
+bool	take_damage(t_pos *pos, t_enemy **list)
 {
 	t_enemy			*enemy;
-	static t_pos	pos[1] = {{-1, -1}};
 
 	enemy = *list;
-	if (pos->x == player->pos->x && pos->y == player->pos->y)
-		return (false);
 	while (enemy)
 	{
 		if (enemy->killed == false \
-		&& player->pos->x == enemy->pos->x && player->pos->y == enemy->pos->y)
-		{
-			player->lives -= 1;
-			pos->x = player->pos->x;
-			pos->y = player->pos->y;
+		&& pos->x == enemy->pos->x && pos->y == enemy->pos->y)
 			return (true);
-		}
 		enemy = enemy->next;
 	}
 	return (false);
@@ -75,14 +67,8 @@ bool	take_damage(t_player *player, t_enemy **list)
 
 void	update_player_stats(t_game *game, t_player *player)
 {
-	if (take_damage(player, game->enemies) == true)
-	{
-		if (player->lives >= 1)
-			// player->status = DMG;
-			ft_printf("-1\n");
-		else
-			player->status = DEAD;
-	}
+	if (player->lives == 0)
+		player->status = DEAD;
 	if (player->collectibles == game->map_info->collectible_count)
 		game->exit_status = true;
 }

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/20 09:51:07 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 11:40:12 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 16:04:56 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,21 @@
 
 static bool	is_valid_coord(int32_t x, int32_t y, t_game *game, char **map)
 {
+	const t_pos	pos = {x, y};
+
 	if (!(x >= 0 && x < game->map_info->cols - 1 \
 	&& y > 0 && y <= game->map_info->rows - 1))
 		return (false);
 	if (map[y][x] == '1')
 		return (false);
-	game->player->status = WALK;
 	game->status = LOCKED;
+	if (take_damage((t_pos *)&pos, game->enemies) == true)
+	{
+		game->player->status = DMG;
+		game->player->lives--;
+		return (false);
+	}
+	game->player->status = WALK;
 	return (true);
 }
 
@@ -64,7 +72,7 @@ static void	move(mlx_key_data_t k, void *param)
 	mlx = game->mlx;
 	if (!time)
 		time = mlx_get_time();
-	if (game->player->status != LOCKED)
+	if (game->status != LOCKED)
 	{
 		if ((k.key == MLX_KEY_W || k.key == MLX_KEY_UP) \
 		&& k.action == MLX_PRESS)

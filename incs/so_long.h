@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 11:36:05 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 16:03:45 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void			collect(t_game *game, t_collect **list, t_pos *pos);
 bool			kill(t_enemy **list, t_pos *pos);
 
 /* update game state */
-bool			take_damage(t_player *player, t_enemy **list);
+bool			take_damage(t_pos *pos, t_enemy **list);
 void			update_player_stats(t_game *game, t_player *player);
 void			exit_game(t_game *game);
 void			restart_game(t_game *game);

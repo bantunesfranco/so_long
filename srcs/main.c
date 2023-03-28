@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 11:35:47 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 16:06:40 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 float	delay(t_player *player)
 {
 	if (player->status == ATK)
-		return (0.02);
+		return (0.025);
 	if (player->status == WALK)
 		return (0.05);
 	if (player->status == DMG)
-		return (0.1);
+		return (0.15);
 	if (player->status == DEAD)
 		return (0.05);
 	return (0);

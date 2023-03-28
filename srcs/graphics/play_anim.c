@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 11:21:58 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 15:56:52 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 17:04:38 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ static void	play_anim(t_player *player, uint8_t **arr, int i)
 		if (!i)
 		{
 			player->moves++;
-			ft_printf("pos (%d, %d)\n", player->pos->x, player->pos->y);
-			ft_printf("moves %d\n", player->moves);
+			ft_printf("Number of moves: %d\n", player->moves);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 16:03:45 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 17:40:11 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define SIZE 32
 # define PADX 640
 # define PADY 160
+# define TEXT_COLOR 0x000000FF
+# define FONT_W 12
 
 typedef enum e_status
 {

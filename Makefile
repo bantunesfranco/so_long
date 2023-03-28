@@ -86,6 +86,6 @@ submodules:
 	git pull --recurse-submodules
 
 update:
-	git submodule update --recursive --remote
+	git submodule update libft
 
 .PHONY: all clean fclean re bonus update git

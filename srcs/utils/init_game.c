@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 13:13:05 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 17:06:34 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,12 @@ static void	init_pois(t_game *game, char **map)
 	uint8_t			**sprites2;
 	mlx_texture_t	*text;
 
-	sprites = ft_calloc(1, sizeof(uint8_t *));
-	sprites2 = ft_calloc(1, sizeof(uint8_t *));
-	if (!sprites || !sprites2)
-		ft_error("so_long", ENOMEM);
 	text = mlx_load_png("./sprites/coin.png");
 	sprites = load_poi_anim(text, 4, 0, 'C');
 	text = mlx_load_png("./sprites/ghost48.png");
 	sprites2 = load_poi_anim(text, 6, 0, 'K');
+	if (!sprites || !sprites2)
+		ft_error("so_long", ENOMEM);
 	pos.y = -1;
 	while (++pos.y < game->map_info->rows)
 	{
@@ -135,4 +133,6 @@ void	init_game(t_game *game, char **argv)
 	game->exit_status = false;
 	game->time = 0;
 	game->ui = ft_calloc(1, sizeof(t_ui));
+	if (!game->ui)
+		ft_error("so_long", ENOMEM);
 }

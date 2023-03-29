@@ -6,25 +6,19 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/17 15:06:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 14:01:54 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 16:32:46 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 
-void	render_ui(t_game *game, t_ui *ui, t_player *player)
+void	render_ui2(t_game *game, t_ui *ui, t_player *player)
 {
 	char		*str;
 	char		*str2;
 	const int	width = game->width;
 	const int	height = game->height / 2;
 
-	ui->lives = mlx_put_string(game->mlx, "Lives:", width - 400, height - 50);
-	ui->col = mlx_put_string(game->mlx, "Collectibles:", width - 400, height);
-	ui->moves = mlx_put_string(game->mlx, "Moves:", width - 400, height + 50);
-	str = ft_itoa(player->lives);
-	ui->nb_l = mlx_put_string(game->mlx, str, width - 200, height - 50);
-	free(str);
 	str = ft_itoa(player->lives);
 	ui->nb_l = mlx_put_string(game->mlx, str, width - 200, height - 50);
 	free(str);
@@ -41,6 +35,26 @@ void	render_ui(t_game *game, t_ui *ui, t_player *player)
 	free(str);
 }
 
+void	render_ui(t_game *game, t_ui *ui, t_player *player)
+{
+	mlx_texture_t	*text;
+	const int		width = game->width;
+	const int		height = game->height / 2;
+
+	text = mlx_load_png("./sprites/gui.png");
+	if (!text)
+		ft_error("so_long", mlx_errno);
+	ui->background = mlx_texture_to_image(game->mlx, text);
+	if (!ui->background)
+		ft_error("so_long", mlx_errno);
+	mlx_image_to_window(game->mlx, ui->background, \
+	width - ui->background->height- PADX / 6, \
+	(game->height - ui->background->height) / 2);
+	ui->lives = mlx_put_string(game->mlx, "Lives:", width - 400, height - 50);
+	ui->col = mlx_put_string(game->mlx, "Collectibles:", width - 400, height);
+	ui->moves = mlx_put_string(game->mlx, "Moves:", width - 400, height + 50);
+	render_ui2(game, ui, player);
+}
 
 void	update_ui(t_game *game, t_ui *ui, t_player *player)
 {

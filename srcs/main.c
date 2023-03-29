@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 14:02:46 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 17:25:01 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,20 @@ void	update_game(void *param)
 	update_player_stats(game, game->player);
 }
 
+void	leaks(void)
+{
+	system("leaks -q so_long");
+}
+
 int	main(int argc, char **argv)
 {
 	t_game			game;
 
+	atexit(leaks);
 	if (argc != 2)
 	{
-		ft_putendl_fd("Incorrect number of arguments", 2);
-		exit(22);
+		ft_putendl_fd(ARG, 2);
+		exit(EXIT_FAILURE);
 	}
 	init_game(&game, argv);
 	render_map(&game, game.map);

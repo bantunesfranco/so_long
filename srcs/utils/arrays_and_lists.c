@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/13 09:50:04 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/10 16:17:47 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 17:39:22 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,27 @@ void	ft_free_int_arr(int **arr, int size)
 	free(arr);
 }
 
-void	clear_spritelist(t_game *game, mlx_image_t **arr)
+void	clear_spritelist(t_game *game, mlx_image_t **arr, int size)
 {
 	int	i;
 
 	i = 0;
-	while (i < game->map_info->size)
+	while (i < size)
 	{
 		mlx_delete_image(game->mlx, arr[i]);
 		i++;
 	}
+	free(arr);
+}
+
+void	free_pixel_arr(uint8_t **arr, int size)
+{
+	int	i;
+
+	i = -1;
+	if (!arr || size < 1)
+		return ;
+	while (++i < size)
+		free(arr[i]);
 	free(arr);
 }

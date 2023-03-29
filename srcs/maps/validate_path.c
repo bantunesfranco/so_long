@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:38:55 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 14:04:50 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 18:00:18 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	**alloc_visited(t_map *info)
 	{
 		visited[i] = ft_calloc(info->cols, sizeof(int32_t));
 		if (!visited[i])
-			return (free(visited), NULL);
+			return (free(visited), NULL); //arr free func
 	}
 	return (visited);
 }
@@ -93,11 +93,13 @@ bool	can_exit(char **map, t_map *info, t_pos *pos)
 
 	front = 0;
 	rear = 0;
-	info->queue = (t_pos *)ft_calloc(info->size, sizeof(t_pos));
+	if (!info->queue)
+		info->queue = (t_pos *)ft_calloc(info->size, sizeof(t_pos));
 	if (!info->queue)
 		return (free(info->visited), false);
 	queue = info->queue;
-	info->visited = alloc_visited(info);
+	if (!visited)
+		info->visited = alloc_visited(info);
 	if (!info->visited)
 		return (false);
 	visited = info->visited;

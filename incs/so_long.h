@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 14:02:56 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 17:14:09 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define SIZE 32
 # define PADX 640
 # define PADY 160
-// # define TEXT_COLOR 0x000000FF
-// # define FONT_W 12
+# define ARG "so_long: Invalid number of arguments.\n\
+Use: ./so_long [path_to_map]"
 
 typedef enum e_status
 {
@@ -148,7 +148,6 @@ void			render_player(t_game *game, t_player *player);
 void			render_ui(t_game *game, t_ui *ui, t_player *player);
 void			update_ui(t_game *game, t_ui *ui, t_player *player);
 
-
 /* pixel buffers*/
 uint8_t			**load_poi_anim(mlx_texture_t *txt, int frames, \
 								int y, char type);
@@ -182,6 +181,7 @@ float			delay(t_player *player);
 /* cleanup */
 void			free_info(t_map *info);
 void			ft_free_int_arr(int **arr, int size);
-void			clear_spritelist(t_game *game, mlx_image_t **arr);
+void			free_pixel_arr(uint8_t **arr, int size);
+void			clear_spritelist(t_game *game, mlx_image_t **arr, int size);
 
 #endif

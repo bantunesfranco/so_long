@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 11:21:58 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 17:04:38 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 13:45:57 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	move_sprite(t_player *player, t_dir move_dir)
 		moved = 0;
 }
 
-static void	play_anim(t_player *player, uint8_t **arr, int i)
+static void	play_anim(t_game *game, t_player *player, uint8_t **arr, int i)
 {
 	int			dir;
 
@@ -58,6 +58,7 @@ static void	play_anim(t_player *player, uint8_t **arr, int i)
 		{
 			player->moves++;
 			ft_printf("Number of moves: %d\n", player->moves);
+			update_ui(game, game->ui, game->player);
 		}
 	}
 }
@@ -92,7 +93,7 @@ void	update_anim(t_game *game, t_player *player)
 		sprites = player->sprites[4];
 	else
 		return ;
-	play_anim(player, sprites, i);
+	play_anim(game, player, sprites, i);
 	i++;
 	if (i == frames)
 		end_check(game, player, &i);

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 13:12:32 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 14:02:56 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,8 @@ void			render_map(t_game *game, char **map);
 void			render_player(t_game *game, t_player *player);
 
 /* ui */
-void			render_ui(t_game *game, t_player *player);
-void			render_static_ui(t_game *game, t_ui *ui, t_player *player);
+void			render_ui(t_game *game, t_ui *ui, t_player *player);
+void			update_ui(t_game *game, t_ui *ui, t_player *player);
 
 
 /* pixel buffers*/

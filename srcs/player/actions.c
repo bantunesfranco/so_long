@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/20 09:51:07 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 16:04:56 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 13:47:21 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static bool	is_valid_coord(int32_t x, int32_t y, t_game *game, char **map)
 	{
 		game->player->status = DMG;
 		game->player->lives--;
+		update_ui(game, game->ui, game->player);
 		return (false);
 	}
 	game->player->status = WALK;

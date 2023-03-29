@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 14:15:20 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 16:04:29 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 13:48:22 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	collect(t_game *game, t_collect **list, t_pos *pos)
 			collect->collected = true;
 			game->player->collectibles += 1;
 			collect->img->enabled = false;
+			update_ui(game, game->ui, game->player);
 			break ;
 		}
 		collect = collect->next;

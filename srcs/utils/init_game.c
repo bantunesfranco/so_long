@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 17:44:23 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 17:06:34 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	add_collect(mlx_t *mlx, t_collect **list, \
 	collect->pos->y = pos->y;
 	collect->collected = false;
 	collect->next = NULL;
-	collect->img = mlx_new_image(mlx, SIZE, SIZE * 2);
+	collect->img = mlx_new_image(mlx, SIZE, SIZE);
 	collect->sprites = arr;
 	if (!*list)
 		collect_add_back(list, collect);
@@ -68,14 +68,12 @@ static void	init_pois(t_game *game, char **map)
 	uint8_t			**sprites2;
 	mlx_texture_t	*text;
 
-	sprites = ft_calloc(1, sizeof(uint8_t *));
-	sprites2 = ft_calloc(1, sizeof(uint8_t *));
-	if (!sprites || !sprites2)
-		ft_error("so_long", ENOMEM);
-	text = mlx_load_png("./sprites/props.png");
-	sprites = load_poi_anim(text, 2, 0, 'C');
+	text = mlx_load_png("./sprites/coin.png");
+	sprites = load_poi_anim(text, 4, 0, 'C');
 	text = mlx_load_png("./sprites/ghost48.png");
 	sprites2 = load_poi_anim(text, 6, 0, 'K');
+	if (!sprites || !sprites2)
+		ft_error("so_long", ENOMEM);
 	pos.y = -1;
 	while (++pos.y < game->map_info->rows)
 	{
@@ -104,10 +102,9 @@ static void	init_player(t_game *game)
 	if (!player->pos)
 		ft_error("so_long", ENOMEM);
 	player->lives = 3;
-	player->dir = RIGHT;
+	player->dir = 3;
+	player->move_dir = 3;
 	player->collectibles = 0;
-	player->start_pos->x = 0;
-	player->start_pos->y = 0;
 	player->moves = 0;
 	game->player = player;
 }
@@ -116,8 +113,10 @@ void	init_game(t_game *game, char **argv)
 {
 	init_player(game);
 	game->map = map_parser(argv[1], game);
-	game->width = SIZE * game->map_info->cols + PAD;
-	game->height = SIZE * game->map_info->rows + PAD;
+	game->width = SIZE * game->map_info->cols + PADX;
+	game->height = SIZE * game->map_info->rows + PADY;
+	if (game->height < SIZE * 12)
+		game->height = SIZE * 12;
 	game->mlx = mlx_init(game->width, game->height, "so_long", true);
 	if (!game->mlx)
 		exit(EXIT_FAILURE);
@@ -130,6 +129,10 @@ void	init_game(t_game *game, char **argv)
 	game->map_tiles = ft_calloc(game->map_info->size, sizeof(mlx_image_t *));
 	if (!game->map_tiles)
 		ft_error("so_long", ENOMEM);
-	game->status = ACTIVE;
+	game->status = UNLOCKED;
+	game->exit_status = false;
 	game->time = 0;
+	game->ui = ft_calloc(1, sizeof(t_ui));
+	if (!game->ui)
+		ft_error("so_long", ENOMEM);
 }

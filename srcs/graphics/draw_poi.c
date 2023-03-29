@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 14:37:21 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/17 15:58:54 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/28 11:35:33 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,25 @@ void	update_enemy(t_enemy **list)
 	}
 }
 
+void	update_collectible(t_collect **list)
+{
+	static int		iter;
+	static double	time;
+	t_collect		*head;
+
+	head = *list;
+	if (mlx_get_time() - time > 0.15)
+	{
+		while (head)
+		{
+			head->img->pixels = head->sprites[iter % 4];
+			head = head->next;
+		}
+		time = mlx_get_time();
+		iter++;
+	}
+}
+
 void	render_collectibles(t_game *game, int x, int y)
 {
 	t_collect		*head;
@@ -51,8 +70,7 @@ void	render_collectibles(t_game *game, int x, int y)
 		head = head->next;
 	}
 	mlx_image_to_window(game->mlx, head->img, \
-	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
-	SIZE * (y - 1) + (game->height - game->map_info->rows * SIZE) / 2);
+	SIZE * x + PADX / 8, SIZE * y + PADY / 2);
 	mlx_set_instance_depth(&head->img->instances[0], 3);
 }
 
@@ -71,7 +89,6 @@ void	render_enemies(t_game *game, int x, int y)
 		head = head->next;
 	}
 	mlx_image_to_window(game->mlx, head->img, \
-	SIZE * x + (game->width - game->map_info->cols * SIZE) / 2 - 150, \
-	SIZE * y + (game->height - game->map_info->rows * SIZE) / 2 - 20);
+	SIZE * x + PADX / 8, SIZE * y + PADY / 2 - 20);
 	mlx_set_instance_depth(&head->img->instances[0], 4);
 }

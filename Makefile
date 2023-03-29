@@ -7,32 +7,26 @@ CYAN=\033[1;36m
 END=\033[0m
 
 CC = gcc
-CFLAGS =  -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS =  #-Wall -Werror -Wextra #-g -fsanitize=address
 NAME = so_long
 LIBFT = libft/libft.a
 MLX = MLX42/build/libmlx42.a
 
 DIR_S = srcs
 DIR_I = incs
+DIR_O = obj
 
-INCS = -I$(DIR_I) -Ilibft/$(DIR_I) -IMLX42/include
+INCS = -I $(DIR_I) -I libft/$(DIR_I) -IMLX42/include
 
-# SOURCES = main.c\
-# 		utils/arrays_and_lists.c\
-# 		utils/init_game.c\
-# 		utils/split_texture.c\
-# 		maps/make_map.c\
-# 		maps/validate_map.c\
-# 		maps/validate_path.c\
-# 		player/actions.c\
-# 		player/stats.c\
-# 		graphics/draw_player.c\
-# 		graphics/render_walls.c\
-# 		graphics/render_map.c\
-# 		graphics/play_anim.c
+SRCS = main.c\
+		graphics/draw_player.c graphics/draw_poi.c graphics/make_player_anim.c graphics/make_poi_anim.c \
+		graphics/play_anim.c graphics/render_map.c graphics/render_walls.c graphics/ui.c \
+		utils/arrays_and_lists.c utils/end_game.c utils/exit.c \
+		utils/init_game.c utils/reset_game.c utils/split_texture.c\
+		maps/make_map.c maps/validate_map.c maps/validate_path.c\
+		player/actions.c player/stats.c 
 
-# SRCS = ${addprefix ${DIR_S}/,${SOURCES}}
-SRCS = $(shell find ./srcs -type f -name "*.c" )
+OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
 
 ifeq ($(OS), Windows_NT)
 	FW_FLAGS := -lglfw3 -lopengl32 -lgdi32
@@ -48,23 +42,33 @@ else
 	endif
 endif
 
+all: ${NAME}
 
-${NAME}: ${SRCS} ${DIR_I}/${NAME}.h
+${MLX}:
 	@cmake MLX42 -B MLX42/build
 	@make -C MLX42/build -j4
+
+${NAME}: ${MLX} ${OBJS} ${DIR_I}/${NAME}.h
+
 	@make -s -C libft
 	@echo "${BLUE}Compiling ${NAME}${END}"
-	@${CC} ${CFLAGS} ${FW_FLAGS} ${SRCS} ${LIBFT} ${MLX} ${INCS} -o ${NAME} 
+	@${CC} ${CFLAGS} ${FW_FLAGS} ${LIBFT} ${MLX} ${OBJS} -o ${NAME} 
 	@echo "${GREEN}Done!${END}"
+
+${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
+	@mkdir -p ${@D}
+	@echo "${BLUE}Compiling $<${END}"
+	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
 bonus: ${NAME}
 
-all: ${NAME}
 
 clean:
-	@make -s -C libft
+	@make clean -s -C libft 
 	@echo "${RED}Removing MLX42${END}"
 	@rm -rf MLX42/build
+	@echo "${RED}Removing objs${END}"
+	@rm -rf obj
 	@echo "${GREEN}Done!${END}"
 
 fclean: clean
@@ -75,13 +79,13 @@ fclean: clean
 re: fclean all
 
 git:
-	git commit -m "auto commit"
+	git commit
 	git push
 
 submodules:
 	git pull --recurse-submodules
 
 update:
-	git submodule update --recursive --remote
+	git submodule update libft
 
 .PHONY: all clean fclean re bonus update git

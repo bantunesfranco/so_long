@@ -3,3 +3,6 @@ so_long
 *.dSYM
 *.out
 *.a
+*.out
+*.o
+obj

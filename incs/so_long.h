@@ -24,6 +24,10 @@
 # define PADY 160
 # define ARG "so_long: Invalid number of arguments.\n\
 Use: ./so_long [path_to_map]"
+# define CMDS "Arrow keys or WASD to move\n\
+R to restart\n\
+SPACE to attack\n\
+ESC to exit game"
 
 typedef enum e_status
 {
@@ -123,7 +127,6 @@ typedef struct s_game
 	t_player	*player;
 	t_enemy		**enemies;
 	t_collect	**collectibles;
-	mlx_image_t	**map_tiles;
 	double		time;
 	t_status	status;
 	bool		exit_status;

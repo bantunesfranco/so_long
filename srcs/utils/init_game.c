@@ -71,7 +71,7 @@ static void	init_pois(t_game *game, char **map)
 	text = mlx_load_png("./sprites/coin.png");
 	sprites = load_poi_anim(text, 4, 0, 'C');
 	text = mlx_load_png("./sprites/ghost48.png");
-	sprites2 = load_poi_anim(text, 6, 0, 'K');
+	sprites2 = load_poi_anim(text, 12, 0, 'K');
 	if (!sprites || !sprites2)
 		ft_error("so_long", ENOMEM);
 	pos.y = -1;
@@ -126,9 +126,6 @@ void	init_game(t_game *game, char **argv)
 		ft_error("so_long", ENOMEM);
 	game->player->img = mlx_new_image(game->mlx, 48, 48);
 	init_pois(game, game->map);
-	game->map_tiles = ft_calloc(game->map_info->size, sizeof(mlx_image_t *));
-	if (!game->map_tiles)
-		ft_error("so_long", ENOMEM);
 	game->status = UNLOCKED;
 	game->exit_status = false;
 	game->time = 0;

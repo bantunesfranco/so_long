@@ -61,6 +61,7 @@ int	main(int argc, char **argv)
 		ft_putendl_fd(ARG, 2);
 		exit(EXIT_FAILURE);
 	}
+	ft_printf("%s\n", CMDS);
 	init_game(&game, argv);
 	render_map(&game, game.map);
 	render_ui(&game, game.ui, game.player);

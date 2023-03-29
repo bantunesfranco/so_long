@@ -23,7 +23,6 @@ static void	render_middle(t_game *game, mlx_texture_t *texture, int x, int y)
 	mlx_image_to_window(game->mlx, img, \
 	SIZE * x + PADX / 8, SIZE * y + PADY / 2 - 5);
 	mlx_set_instance_depth(img->instances, 1);
-	game->map_tiles[x + game->map_info->cols * y] = img;
 }
 
 static void	render_corners(t_game *game, mlx_texture_t *texture, int x, int y)
@@ -48,7 +47,6 @@ static void	render_corners(t_game *game, mlx_texture_t *texture, int x, int y)
 		SIZE * x + PADX / 8, SIZE * y + PADY / 2);
 	}
 	mlx_set_instance_depth(img->instances, 1);
-	game->map_tiles[x + game->map_info->cols * y] = img;
 }
 
 static void	render_leftright(t_game *game, mlx_texture_t *texture, int x, int y)
@@ -72,7 +70,6 @@ static void	render_leftright(t_game *game, mlx_texture_t *texture, int x, int y)
 		SIZE * x + PADX / 8, SIZE * y + PADY / 2);
 	}
 	mlx_set_instance_depth(img->instances, 1);
-	game->map_tiles[x + game->map_info->cols * y] = img;
 }
 
 static void	render_topbot(t_game *game, mlx_texture_t *texture, int x, int y)
@@ -96,7 +93,6 @@ static void	render_topbot(t_game *game, mlx_texture_t *texture, int x, int y)
 		SIZE * x + PADX / 8, SIZE * y + PADY / 2);
 	}
 	mlx_set_instance_depth(img->instances, 1);
-	game->map_tiles[x + game->map_info->cols * y] = img;
 }
 
 void	render_walls(t_game *game, int x, int y)

@@ -30,24 +30,6 @@ static void	make_frames(uint8_t **arr, mlx_texture_t *text, int x, int y)
 	}
 }
 
-// static void	make_frames2(uint8_t **arr, mlx_texture_t *text, int x, int y)
-// {
-// 	const uint32_t		xy[2] = {48 * x + 8, 48 * y};
-// 	const uint32_t		wh[2] = {32, 48};
-
-// 	arr[x] = split_text(text, (uint32_t *)xy, (uint32_t *)wh);
-// 	if (!arr[x])
-// 	{
-// 		while (x >= 0)
-// 		{
-// 			free(arr[x]);
-// 			x--;
-// 		}
-// 		free(arr);
-// 		ft_error("so_long", mlx_errno);
-// 	}
-// }
-
 uint8_t	**load_poi_anim(mlx_texture_t *txt, int frames, int y, char type)
 {
 	uint8_t	**sprites;

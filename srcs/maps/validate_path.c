@@ -41,7 +41,7 @@ static int	**alloc_visited(t_map *info)
 	{
 		visited[i] = ft_calloc(info->cols, sizeof(int32_t));
 		if (!visited[i])
-			return (free(visited), NULL); //arr free func
+			return (ft_free_int_arr(visited, i), NULL);
 	}
 	return (visited);
 }

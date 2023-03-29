@@ -6,45 +6,60 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/17 15:06:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 14:08:05 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 13:12:39 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 
-void	render_ui(t_game *game, t_player *player)
+static void	render_dynamic_ui(t_game *game, t_ui *ui, t_player *player)
 {
-	static int			iter;
-	static mlx_image_t	*img;
-	static mlx_image_t	*img2;
-	static mlx_image_t	*img3;
+	char		*str;
+	char		*str2;
+	const int	width = game->width - 100;
+	const int	height = game->height / 2;
 
-	if (iter == 0)
-	{	
-		mlx_put_string(game->mlx, "Lives:", game->width - 300, \
-		game->height / 2);
-		mlx_put_string(game->mlx, "Collectibles:", \
-		game->width - 300, game->height / 2 + 100);
-		mlx_put_string(game->mlx, "Moves:", game->width - 300, \
-		game->height / 2 + 200);
-		img = mlx_put_string(game->mlx, ft_itoa(player->lives), \
-		game->width - 100, game->height / 2);
-		img2 = mlx_put_string(game->mlx, ft_itoa(player->collectibles), \
-		game->width - 100, game->height / 2 + 100);
-		img3 = mlx_put_string(game->mlx, ft_itoa(player->collectibles), \
-		game->width - 100, game->height / 2 + 200);
-		iter = 1;
-	}
-	if (iter > 0)
-	{
-		mlx_delete_image(game->mlx, img);
-		img = mlx_put_string(game->mlx, ft_itoa(player->lives), \
-		game->width - 100, game->height / 2);
-		mlx_delete_image(game->mlx, img2);
-		img2 = mlx_put_string(game->mlx, ft_itoa(player->collectibles), \
-		game->width - 100, game->height / 2 + 100);
-		mlx_delete_image(game->mlx, img3);
-		img3 = mlx_put_string(game->mlx, ft_itoa(player->moves), \
-		game->width - 100, game->height / 2 + 200);
-	}
+	ui = game->ui;
+	str = ft_itoa(player->lives);
+	ui->nb_l = mlx_put_string(game->mlx, str, width, height - 50);
+	free(str);
+	str = ft_itoa(player->collectibles);
+	ui->nb_c = mlx_put_string(game->mlx, str, width, height);
+	free(str);
+	str = ft_itoa(game->map_info->collectible_count);
+	str2 = ft_strjoin("\\", str);
+	str = ft_itoa(player->moves);
+	free(str);
+	free(str2);
+	ui->total = mlx_put_string(game->mlx, str, width + 20, height);
+	ui->nb_m = mlx_put_string(game->mlx, str, width, height + 50);
+	free(str);
 }
+
+void	render_static_ui(t_game *game, t_ui *ui, t_player *player)
+{
+	char		*str;
+	const int	width = game->width - 300;
+	const int	height = game->height / 2;
+
+	ui = game->ui;
+	ui->lives = mlx_put_string(game->mlx, "Lives:", width, height - 50);
+	ui->col = mlx_put_string(game->mlx, "Collectibles:", width, height);
+	ui->moves = mlx_put_string(game->mlx, "Moves:", width, height + 50);
+	str = ft_itoa(player->lives);
+	ui->nb_l = mlx_put_string(game->mlx, str, game->width - 100, height - 50);
+	free(str);
+	str = ft_itoa(player->collectibles);
+	ui->nb_c = mlx_put_string(game->mlx, str, game->width - 100, height);
+	free(str);
+	str = ft_itoa(player->collectibles);
+	ui->nb_m = mlx_put_string(game->mlx, str, game->width - 100, height + 50);
+	free(str);
+	render_dynamic_ui(game, ui, player);
+}
+
+
+// void	update_ui(t_game *game, t_player *player)
+// {
+	
+// }

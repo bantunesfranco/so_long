@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 17:40:11 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 13:12:32 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define SIZE 32
 # define PADX 640
 # define PADY 160
-# define TEXT_COLOR 0x000000FF
-# define FONT_W 12
+// # define TEXT_COLOR 0x000000FF
+// # define FONT_W 12
 
 typedef enum e_status
 {
@@ -98,11 +98,26 @@ typedef struct s_map
 	t_pos	*queue;
 }	t_map;
 
+typedef struct s_ui
+{
+	mlx_image_t	*lives;
+	mlx_image_t	*col;
+	mlx_image_t	*moves;
+	mlx_image_t	*nb_m;
+	mlx_image_t	*nb_c;
+	mlx_image_t	*nb_l;
+	mlx_image_t	*total;
+	mlx_image_t	*background;
+	mlx_image_t	*end;
+	mlx_image_t	*end_msg;
+}	t_ui;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
 	t_map		*map_info;
 	char		**map;
+	t_ui		*ui;
 	int32_t		width;
 	int32_t		height;
 	t_player	*player;
@@ -128,7 +143,11 @@ bool			can_exit(char **map, t_map *info, t_pos *pos);
 void			render_walls(t_game *game, int x, int y);
 void			render_map(t_game *game, char **map);
 void			render_player(t_game *game, t_player *player);
+
+/* ui */
 void			render_ui(t_game *game, t_player *player);
+void			render_static_ui(t_game *game, t_ui *ui, t_player *player);
+
 
 /* pixel buffers*/
 uint8_t			**load_poi_anim(mlx_texture_t *txt, int frames, \

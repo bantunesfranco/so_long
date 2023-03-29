@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 16:06:40 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/29 13:12:46 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	update_game(void *param)
 		time = mlx_get_time();
 	}
 	update_player_stats(game, game->player);
-	render_ui(game, game->player);
+	// render_ui(game, game->player);
 }
 
 int	main(int argc, char **argv)
@@ -58,6 +58,7 @@ int	main(int argc, char **argv)
 	}
 	init_game(&game, argv);
 	render_map(&game, game.map);
+	render_static_ui(&game, game.ui, game.player);
 	mlx_loop_hook(game.mlx, update_game, &game);
 	mlx_key_hook(game.mlx, interactions, &game);
 	mlx_loop(game.mlx);

@@ -150,6 +150,7 @@ void			render_player(t_game *game, t_player *player);
 /* ui */
 void			render_ui(t_game *game, t_ui *ui, t_player *player);
 void			update_ui(t_game *game, t_ui *ui, t_player *player);
+void			end_screen(t_game *game, t_ui *ui, char *str);
 
 /* pixel buffers*/
 uint8_t			**load_poi_anim(mlx_texture_t *txt, int frames, \
@@ -184,7 +185,5 @@ float			delay(t_player *player);
 /* cleanup */
 void			free_info(t_map *info);
 void			ft_free_int_arr(int **arr, int size);
-void			free_pixel_arr(uint8_t **arr, int size);
-void			clear_spritelist(t_game *game, mlx_image_t **arr, int size);
 
 #endif

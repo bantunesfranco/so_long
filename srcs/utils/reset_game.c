@@ -76,5 +76,6 @@ void	restart_game(t_game *game)
 	reset_enemies(game->enemies);
 	reset_collectibles(game->collectibles);
 	update_ui(game, game->ui, game->player);
+	end_screen(game, game->ui, "RESTARTING");
 	return ;
 }

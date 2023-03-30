@@ -73,6 +73,7 @@ typedef struct s_enemy
 	t_pos			*start_pos;
 	t_pos			*pos;
 	t_dir			dir;
+	t_dir			move_dir;
 	struct s_enemy	*next;
 }	t_enemy;
 
@@ -173,6 +174,7 @@ void			update_anim(t_game *game, t_player *player);
 void			interactions(mlx_key_data_t k, void *param);
 void			collect(t_game *game, t_collect **list, t_pos *pos);
 bool			kill(t_enemy **list, t_pos *pos);
+void			move_sprite(t_player *player, t_dir move_dir);
 
 /* update game state */
 bool			take_damage(t_pos *pos, t_enemy **list);

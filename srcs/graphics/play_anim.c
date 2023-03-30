@@ -12,7 +12,7 @@
 
 #include <so_long.h>
 
-static void	move_sprite(t_player *player, t_dir move_dir)
+void	move_sprite(t_player *player, t_dir move_dir)
 {
 	int			step;
 	static int	moved = 0;

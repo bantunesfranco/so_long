@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:38:55 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 18:00:18 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/30 12:12:22 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,15 @@ static bool	dequeue(char **map, t_map *info, int front, int rear)
 		curr = info->queue[front];
 		front++;
 		if (map[curr.y][curr.x] == 'E')
-			return (free(info->visited), free(info->queue), true);
+			return (ft_free_int_arr(info->visited, info->rows), \
+			free(info->queue), true);
 		if (look_around(map, info, &curr, &rear) == false)
-			return (free(info->visited), free(info->queue), false);
+			return (ft_free_int_arr(info->visited, info->rows), \
+			free(info->queue), false);
 	}
-	return (free(info->visited), free(info->queue), false);
+	ft_free_int_arr(info->visited, info->rows);
+	free(info->queue);
+	return (false);
 }
 
 bool	can_exit(char **map, t_map *info, t_pos *pos)
@@ -93,13 +97,11 @@ bool	can_exit(char **map, t_map *info, t_pos *pos)
 
 	front = 0;
 	rear = 0;
-	if (!info->queue)
-		info->queue = (t_pos *)ft_calloc(info->size, sizeof(t_pos));
+	info->queue = (t_pos *)ft_calloc(info->size, sizeof(t_pos));
 	if (!info->queue)
 		return (free(info->visited), false);
 	queue = info->queue;
-	if (!visited)
-		info->visited = alloc_visited(info);
+	info->visited = alloc_visited(info);
 	if (!info->visited)
 		return (false);
 	visited = info->visited;

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/17 15:06:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 16:32:46 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/30 12:27:04 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	render_ui(t_game *game, t_ui *ui, t_player *player)
 	if (!ui->background)
 		ft_error("so_long", mlx_errno);
 	mlx_image_to_window(game->mlx, ui->background, \
-	width - ui->background->height- PADX / 6, \
+	width - ui->background->height - PADX / 6, \
 	(game->height - ui->background->height) / 2);
 	ui->lives = mlx_put_string(game->mlx, "Lives:", width - 400, height - 50);
 	ui->col = mlx_put_string(game->mlx, "Collectibles:", width - 400, height);

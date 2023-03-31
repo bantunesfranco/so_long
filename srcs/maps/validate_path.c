@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:38:55 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/30 12:12:22 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 14:09:52 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ static int	**alloc_visited(t_map *info)
 	int32_t	**visited;
 	int32_t	i;
 
+	if (info->visited)
+	{
+		ft_free_int_arr(info->visited, info->rows);
+		info->visited = NULL;
+	}
 	visited = ft_calloc(info->rows, sizeof(int32_t *));
 	if (!visited)
 		return (NULL);
@@ -77,39 +82,41 @@ static bool	dequeue(char **map, t_map *info, int front, int rear)
 		curr = info->queue[front];
 		front++;
 		if (map[curr.y][curr.x] == 'E')
-			return (ft_free_int_arr(info->visited, info->rows), \
-			free(info->queue), true);
+		{
+			free(info->queue);
+			info->queue = NULL;
+			return (true);
+		}
 		if (look_around(map, info, &curr, &rear) == false)
-			return (ft_free_int_arr(info->visited, info->rows), \
-			free(info->queue), false);
+		{
+			free(info->queue);
+			info->queue = NULL;
+			return (false);
+		}
 	}
-	ft_free_int_arr(info->visited, info->rows);
 	free(info->queue);
+	info->queue = NULL;
 	return (false);
 }
 
 bool	can_exit(char **map, t_map *info, t_pos *pos)
 {
-	int32_t		**visited;
 	int32_t		front;
 	int32_t		rear;
-	t_pos		*queue;
 
 	front = 0;
 	rear = 0;
 	info->queue = (t_pos *)ft_calloc(info->size, sizeof(t_pos));
 	if (!info->queue)
-		return (free(info->visited), false);
-	queue = info->queue;
+		ft_error("so_long", ENOMEM);
 	info->visited = alloc_visited(info);
 	if (!info->visited)
-		return (false);
-	visited = info->visited;
-	ft_memset(visited, 0, sizeof(visited));
-	queue[rear].x = pos->x;
-	queue[rear].y = pos->y;
+		ft_error("so_long", ENOMEM);
+	ft_memset(info->visited, 0, sizeof(info->visited));
+	info->queue[rear].x = pos->x;
+	info->queue[rear].y = pos->y;
 	rear++;
-	visited[pos->y][pos->x] = true;
+	info->visited[pos->y][pos->x] = true;
 	if (dequeue(map, info, front, rear) == false)
 		return (false);
 	return (true);

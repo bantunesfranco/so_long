@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/17 12:50:09 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/30 16:51:04 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 14:49:42 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,12 @@ void	end_screen(t_game *game, t_ui *ui, char *str)
 
 void	end_game(t_game *game)
 {
-	const double	time = mlx_get_time();
-	static int		i = 0;
 
-	if (game->status != END)
-	{
 		if (game->player->status == DEAD)
-			end_screen(game, game->ui, "YOU LOST");
+			ft_printf("You Lost!!\n");
 		else
-			end_screen(game, game->ui, "YOU WON");
-		game->status = END;
-		i++;
-		return ;
-	}
-	else if (game->status == END && i == 2)
-	{
-		while (1)
-		{
-			if (mlx_get_time() - time > 2.0)
-				break ;
-		}
-		exit_game(game);
-	}
-	i++;
+			ft_printf("You Won!!\n");
+
+			exit_game(game);
+	// }
 }

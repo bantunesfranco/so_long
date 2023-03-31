@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 16:20:12 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/30 16:51:48 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 14:50:13 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,34 +72,10 @@ static void	reset_collectibles(t_collect **list)
 
 void	restart_game(t_game *game)
 {
-	const double	time = mlx_get_time();
-	static int		i = 0;
-
-	if (game->status != RESTART)
-	{
 		reset_player(game->player);
 		reset_enemies(game->enemies);
 		reset_collectibles(game->collectibles);
 		update_ui(game, game->ui, game->player);
-		end_screen(game, game->ui, "RESTARTING");
-		game->status = RESTART;
-		i++;
-		return ;
-	}
-	else if (game->status == RESTART && i == 2)
-	{
-		ft_printf("hi\n");
-		game->status = LOCKED;
-		while (1)
-		{
-			if (mlx_get_time() - time > 2.00)
-				break ;
-		}
-		mlx_delete_image(game->mlx, game->ui->end_msg);
-		mlx_delete_image(game->mlx, game->ui->end);
-		game->status = UNLOCKED;
-		i = 0;
-		return ;
-	}
-	i++;
+		ft_printf("Restarting...\n");
+
 }

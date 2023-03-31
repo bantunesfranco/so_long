@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/31 13:33:50 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 14:47:07 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,17 @@ void	update_game(void *param)
 	pos = game->player->pos;
 	update_enemy(game->enemies);
 	update_collectible(game->collectibles);
-	collect(game, game->collectibles, game->player->pos);
 	if (game->status == UNLOCKED)
+	{
 		update_player(game->player);
+		collect(game, game->collectibles, game->player->pos);
+	}
 	else if (mlx_get_time() - time > delay(game->player) \
 	&& game->status == LOCKED)
 	{
 		update_anim(game, game->player);
 		time = mlx_get_time();
 	}
-	else if (game->status == RESTART)
-		restart_game(game);
-	else if (game->status == END)
-		end_game(game);
 	update_player_stats(game, game->player);
 }
 

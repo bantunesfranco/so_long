@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 14:15:20 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 13:48:22 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 14:42:44 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ bool	take_damage(t_pos *pos, t_enemy **list)
 void	update_player_stats(t_game *game, t_player *player)
 {
 	if (player->lives == 0)
+	{
 		player->status = DEAD;
+		// game->end = true;
+	}
 	if (player->collectibles == game->map_info->collectible_count)
 		game->exit_status = true;
 }

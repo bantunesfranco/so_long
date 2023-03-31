@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/30 12:32:44 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/30 16:43:31 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef enum e_status
 	LOCKED = 6,
 	UNLOCKED = 7,
 	RESTART = 8,
+	END = 9,
 }	t_status;
 
 typedef enum e_dir

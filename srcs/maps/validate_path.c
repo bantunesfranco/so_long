@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:38:55 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/31 16:07:50 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 16:36:13 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ static int	**alloc_visited(t_map *info)
 	int32_t	**visited;
 	int32_t	i;
 
-	if (info->visited)
-	{
-		ft_free_int_arr(info->visited, info->rows);
-		info->visited = NULL;
-	}
 	visited = ft_calloc(info->rows, sizeof(int32_t *));
 	if (!visited)
 		return (NULL);
@@ -84,18 +79,18 @@ static bool	dequeue(char **map, t_map *info, int front, int rear)
 		if (map[curr.y][curr.x] == 'E')
 		{
 			free(info->queue);
-			info->queue = NULL;
+			ft_free_int_arr(info->visited, info->rows);
 			return (true);
 		}
 		if (look_around(map, info, &curr, &rear) == false)
 		{
 			free(info->queue);
-			info->queue = NULL;
+			ft_free_int_arr(info->visited, info->rows);
 			return (false);
 		}
 	}
 	free(info->queue);
-	info->queue = NULL;
+	ft_free_int_arr(info->visited, info->rows);
 	return (false);
 }
 

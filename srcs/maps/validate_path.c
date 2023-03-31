@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:38:55 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/31 14:09:52 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 16:07:50 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ bool	can_exit(char **map, t_map *info, t_pos *pos)
 	info->visited = alloc_visited(info);
 	if (!info->visited)
 		ft_error("so_long", ENOMEM);
-	ft_memset(info->visited, 0, sizeof(info->visited));
+	ft_bzero(info->visited, sizeof(info->visited));
 	info->queue[rear].x = pos->x;
 	info->queue[rear].y = pos->y;
 	rear++;

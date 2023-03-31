@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 16:20:12 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/31 14:50:13 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 17:06:16 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ static void	reset_collectibles(t_collect **list)
 
 void	restart_game(t_game *game)
 {
-		reset_player(game->player);
-		reset_enemies(game->enemies);
-		reset_collectibles(game->collectibles);
-		update_ui(game, game->ui, game->player);
-		ft_printf("Restarting...\n");
+	reset_player(game->player);
+	reset_enemies(game->enemies);
+	reset_collectibles(game->collectibles);
+	update_ui(game, game->ui, game->player);
+	ft_printf("Restarting...\n");
 
 }

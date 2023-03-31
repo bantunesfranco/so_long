@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 11:21:58 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/31 14:44:23 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 17:38:06 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	play_anim(t_game *game, t_player *player, uint8_t **arr, int i)
 			update_ui(game, game->ui, game->player);
 		}
 	}
+	mlx_set_instance_depth(&player->img->instances[0], 5 + player->pos->y);
 }
 
 static void	end_check(t_game *game, t_player *player, int *i)

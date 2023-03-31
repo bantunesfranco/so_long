@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/17 12:50:09 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/31 14:49:42 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 17:05:45 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ void	end_screen(t_game *game, t_ui *ui, char *str)
 void	end_game(t_game *game)
 {
 
-		if (game->player->status == DEAD)
-			ft_printf("You Lost!!\n");
-		else
-			ft_printf("You Won!!\n");
-
-			exit_game(game);
-	// }
+	if (game->player->status == DEAD)
+		ft_printf("You Lost!!\n");
+	else
+		ft_printf("You Won!!\n");
+	exit_game(game);
 }

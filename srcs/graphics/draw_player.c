@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/24 15:48:43 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/31 17:38:00 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/04/03 12:23:56 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	render_player(t_game *game, t_player *player)
 	sprites[2] = load_player_anim(texture, 16, 8);
 	sprites[3] = load_player_anim(texture, 16, 6);
 	sprites[4] = load_player_anim(texture, 16, 7);
+	mlx_delete_texture(texture);
 	player->sprites = sprites;
 	img->pixels = player->sprites[0][0];
 	mlx_image_to_window(game->mlx, img, \

@@ -32,7 +32,7 @@ uint8_t	*split_text(mlx_texture_t *text, uint32_t xy[2], uint32_t wh[2])
 	{
 		pixelx = &text->pixels[((xy[1] + y) * text->width + xy[0]) * BPP];
 		pixeli = &pixels[y * wh[0] * BPP];
-		memmove(pixeli, pixelx, wh[0] * BPP);
+		ft_memmove(pixeli, pixelx, wh[0] * BPP);
 	}
 	return (pixels);
 }

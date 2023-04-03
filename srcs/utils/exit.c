@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/15 11:03:25 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/04/03 14:46:02 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/04/03 15:01:08 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	clear_sprites(t_collect **lst, t_enemy **lst2)
 	t_collect	*head;
 	t_enemy		*head2;
 
-	head = NULL;
-	head2 = NULL;
 	if (*lst2)
 	{
 		head = *lst;

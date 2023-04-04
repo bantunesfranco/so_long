@@ -28,11 +28,9 @@ float	delay(t_player *player)
 void	update_game(void *param)
 {
 	t_game			*game;
-	t_pos			*pos;
 	static double	time;
 
 	game = param;
-	pos = game->player->pos;
 	update_enemy(game->enemies);
 	update_collectible(game->collectibles);
 	if (game->status == UNLOCKED)
@@ -49,16 +47,16 @@ void	update_game(void *param)
 	update_player_stats(game, game->player);
 }
 
-void	leaks(void)
-{
-	system("leaks -q  so_long");
-}
+// void	leaks(void)
+// {
+// 	system("leaks -q  so_long");
+// }
 
 int	main(int argc, char **argv)
 {
 	t_game			game;
 
-	atexit(leaks);
+	// atexit(leaks);
 	if (argc != 2)
 	{
 		ft_putendl_fd(ARG, 2);

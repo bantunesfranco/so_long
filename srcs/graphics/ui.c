@@ -54,6 +54,7 @@ void	render_ui(t_game *game, t_ui *ui, t_player *player)
 	ui->col = mlx_put_string(game->mlx, "Collectibles:", width - 400, height);
 	ui->moves = mlx_put_string(game->mlx, "Moves:", width - 400, height + 50);
 	render_ui2(game, ui, player);
+	mlx_delete_texture(text);
 }
 
 void	update_ui(t_game *game, t_ui *ui, t_player *player)

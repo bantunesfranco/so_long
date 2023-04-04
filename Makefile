@@ -7,7 +7,7 @@ CYAN=\033[1;36m
 END=\033[0m
 
 CC = gcc
-CFLAGS =  -Wall -Werror -Wextra -Wunused -Wunreachable-code -g #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=leak
 NAME = so_long
 LIBFT = libft/libft.a
 MLX = MLX42/build/libmlx42.a
@@ -34,7 +34,7 @@ ifeq ($(OS), Windows_NT)
 else
 	UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S), Linux)
-		FW_FLAGS := -ldl -lglfw -pthread -lm
+		FW_FLAGS := -Wl,--no-as-needed -ldl -lglfw -pthread -lm
 	else ifeq ($(UNAME_S), Darwin)
 		FW_FLAGS := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 	else

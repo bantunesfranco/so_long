@@ -25,6 +25,7 @@ void	render_exit(t_game *game, int x, int y)
 	mlx_image_to_window(game->mlx, img, \
 	SIZE * x + PADX / 8, SIZE * y + PADY / 2);
 	mlx_set_instance_depth(&img->instances[0], 1);
+	mlx_delete_texture(texture);
 }
 
 void	render_floor(t_game *game, int x, int y)

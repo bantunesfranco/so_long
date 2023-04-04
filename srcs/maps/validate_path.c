@@ -32,6 +32,7 @@ static int	**alloc_visited(t_map *info)
 {
 	int32_t	**visited;
 	int32_t	i;
+	int32_t	j;
 
 	visited = ft_calloc(info->rows, sizeof(int32_t *));
 	if (!visited)
@@ -42,6 +43,13 @@ static int	**alloc_visited(t_map *info)
 		visited[i] = ft_calloc(info->cols, sizeof(int32_t));
 		if (!visited[i])
 			return (ft_free_int_arr(visited, i), NULL);
+	}
+	i = -1;
+	while (++i < info->rows)
+	{
+		j = -1;
+		while (++j < info->cols)
+			ft_memset(&visited[i][j], 0, sizeof(int32_t));
 	}
 	return (visited);
 }
@@ -104,10 +112,10 @@ bool	can_exit(char **map, t_map *info, t_pos *pos)
 	info->queue = (t_pos *)ft_calloc(info->size, sizeof(t_pos));
 	if (!info->queue)
 		ft_error("so_long", ENOMEM);
-	info->visited = alloc_visited(info);
+	// if (!info->visited)
+		info->visited = alloc_visited(info);
 	if (!info->visited)
 		ft_error("so_long", ENOMEM);
-	ft_bzero(info->visited, sizeof(info->visited));
 	info->queue[rear].x = pos->x;
 	info->queue[rear].y = pos->y;
 	rear++;

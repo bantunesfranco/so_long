@@ -28,6 +28,7 @@ static void	add_collect(mlx_t *mlx, t_collect **list, \
 	collect->collected = false;
 	collect->next = NULL;
 	collect->img = mlx_new_image(mlx, SIZE, SIZE);
+	free(collect->img->pixels);
 	collect->sprites = arr;
 	if (!*list)
 		collect_add_back(list, collect);
@@ -53,6 +54,7 @@ static void	add_enemy(mlx_t *mlx, t_enemy **list, \
 	enemy->killed = false;
 	enemy->next = NULL;
 	enemy->img = mlx_new_image(mlx, 32, 48);
+	free(enemy->img->pixels);
 	enemy->dir = RIGHT;
 	enemy->sprites = arr;
 	if (!*list)
@@ -121,6 +123,7 @@ void	init_game(t_game *game, char **argv)
 	if (!game->collectibles || !game->enemies)
 		ft_error("so_long", ENOMEM);
 	game->player->img = mlx_new_image(game->mlx, 48, 48);
+	free(game->player->img->pixels);
 	init_pois(game, game->map);
 	game->status = UNLOCKED;
 	game->exit_status = false;

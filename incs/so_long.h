@@ -100,6 +100,7 @@ typedef struct s_map
 	int32_t	player_count;
 	int32_t	exit_count;
 	int32_t	collectible_count;
+	int32_t	enemy_count;
 	int32_t	**visited;
 	t_pos	*queue;
 }	t_map;
@@ -147,7 +148,8 @@ bool			can_exit(char **map, t_map *info, t_pos *pos);
 /* graphics */
 void			render_walls(t_game *game, int x, int y);
 void			render_map(t_game *game, char **map);
-void			render_player(t_game *game, t_player *player);
+void			render_player(t_game *game, t_player *player, \
+								int32_t x, int32_t y);
 
 /* ui */
 void			render_ui(t_game *game, t_ui *ui, t_player *player);

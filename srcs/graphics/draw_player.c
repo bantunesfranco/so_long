@@ -32,14 +32,15 @@ void	update_player(t_player *player)
 	mlx_set_instance_depth(&player->img->instances[0], 5 + player->pos->y);
 }
 
-void	render_player(t_game *game, t_player *player)
+void	render_player(t_game *game, t_player *player, int32_t x, int32_t y)
 {
 	t_pos			*pos;
-	mlx_image_t		*img;
 	mlx_texture_t	*texture;
 
+	player->start_pos->x = x;
+	player->start_pos->y = y;
+	ft_memcpy(player->pos, player->start_pos, sizeof(t_pos *));
 	pos = player->start_pos;
-	img = player->img;
 	texture = mlx_load_png("./sprites/player48.png");
 	if (!texture)
 		ft_error("so_long", mlx_errno);
@@ -52,8 +53,8 @@ void	render_player(t_game *game, t_player *player)
 	player->sprites[3] = load_player_anim(texture, 16, 6);
 	player->sprites[4] = load_player_anim(texture, 16, 7);
 	mlx_delete_texture(texture);
-	img->pixels = player->sprites[0][0];
-	mlx_image_to_window(game->mlx, img, \
+	player->img->pixels = player->sprites[0][0];
+	mlx_image_to_window(game->mlx, player->img, \
 	SIZE * pos->x + PADX / 8 - 5, SIZE * (pos->y - 1) + PADY / 2 + 5);
 	mlx_set_instance_depth(&player->img->instances[0], 5 + pos->y);
 }

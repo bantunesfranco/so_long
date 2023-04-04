@@ -30,7 +30,6 @@ void	end_screen(t_game *game, t_ui *ui, char *str)
 
 void	end_game(t_game *game)
 {
-
 	if (game->player->status == DEAD)
 		ft_printf("You Lost!!\n");
 	else

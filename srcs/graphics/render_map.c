@@ -66,7 +66,7 @@ void	render_map(t_game *game, char **map)
 			else if (map[i][j] == 'K')
 				render_enemies(game, j, i);
 			else if (map[i][j] == 'P')
-				render_player(game, game->player);
+				render_player(game, game->player, j, i);
 		}
 	}
 }

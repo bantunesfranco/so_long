@@ -62,27 +62,27 @@ static bool	can_collect(char **map, t_map *info)
 
 static bool	get_contents(char **map, t_map *info, t_player *player)
 {
-	int32_t		i;
-	int32_t		j;
+	t_pos	pos;
 
-	i = -1;
-	while (++i < info->rows)
+	pos.y = -1;
+	while (++pos.y < info->rows)
 	{
-		j = -1;
-		while (++j < info->cols)
+		pos.x = -1;
+		while (++pos.x < info->cols)
 		{
-			if (!ft_strchr("10PECK", map[i][j]))
+			if (!ft_strchr("10PECK", map[pos.y][pos.x]))
 				return (false);
-			if (map[i][j] == 'P')
+			if (map[pos.y][pos.x] == 'P')
 			{
 				info->player_count++;
-				player->start_pos->x = j;
-				player->start_pos->y = i;
-				ft_memcpy(player->pos, player->start_pos, sizeof(t_pos *));
+				player->start_pos->x = pos.x;
+				player->start_pos->y = pos.y;
 			}
-			else if (map[i][j] == 'E')
+			else if (map[pos.y][pos.x] == 'E')
 				info->exit_count++;
-			else if (map[i][j] == 'C')
+			else if (map[pos.y][pos.x] == 'C')
+				info->collectible_count++;
+			else if (map[pos.y][pos.x] == 'K')
 				info->collectible_count++;
 		}
 	}
@@ -101,7 +101,7 @@ bool	validate_map(char **map, t_map	*info, t_game *game)
 		return (false);
 	if (can_collect(map, info) == false)
 		return (false);
-	if (can_exit(map, info, game->player->pos) == false)
+	if (can_exit(map, info, game->player->start_pos) == false)
 		return (false);
 	return (true);
 }

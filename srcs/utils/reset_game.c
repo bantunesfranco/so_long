@@ -77,5 +77,4 @@ void	restart_game(t_game *game)
 	reset_collectibles(game->collectibles);
 	update_ui(game, game->ui, game->player);
 	ft_printf("Restarting...\n");
-
 }

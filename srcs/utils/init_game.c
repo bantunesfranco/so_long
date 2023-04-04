@@ -66,12 +66,11 @@ static void	init_pois(t_game *game, char **map)
 	t_pos			pos;
 	uint8_t			**sprites;
 	uint8_t			**sprites2;
-	mlx_texture_t	*text;
 
-	text = mlx_load_png("./sprites/coin.png");
-	sprites = load_poi_anim(text, 4, 0, 'C');
-	text = mlx_load_png("./sprites/ghost48.png");
-	sprites2 = load_poi_anim(text, 12, 0, 'K');
+	sprites = load_poi_anim(mlx_load_png("./sprites/coin.png"), 4, 0, 'C');
+	if (game->map_info->enemy_count)
+		sprites2 = load_poi_anim(mlx_load_png("./sprites/ghost48.png"), \
+		12, 0, 'K');
 	if (!sprites || !sprites2)
 		ft_error("so_long", ENOMEM);
 	pos.y = -1;

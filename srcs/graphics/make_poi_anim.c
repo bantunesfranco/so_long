@@ -64,7 +64,7 @@ uint8_t	**load_poi_anim(mlx_texture_t *txt, int frames, int y, char type)
 		while (++i < frames)
 			make_frames(sprites, txt, i, y);
 	}
-	else if (type == 'K')
+	else if (type == 'K' )
 	{
 		while (++i < frames)
 			make_frames2(sprites, txt, i, y);

@@ -112,8 +112,7 @@ bool	can_exit(char **map, t_map *info, t_pos *pos)
 	info->queue = (t_pos *)ft_calloc(info->size, sizeof(t_pos));
 	if (!info->queue)
 		ft_error("so_long", ENOMEM);
-	// if (!info->visited)
-		info->visited = alloc_visited(info);
+	info->visited = alloc_visited(info);
 	if (!info->visited)
 		ft_error("so_long", ENOMEM);
 	info->queue[rear].x = pos->x;

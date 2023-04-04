@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 17:14:09 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/04/03 12:31:20 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef enum e_status
 	LOCKED = 6,
 	UNLOCKED = 7,
 	RESTART = 8,
+	END = 9,
 }	t_status;
 
 typedef enum e_dir
@@ -73,6 +74,7 @@ typedef struct s_enemy
 	t_pos			*start_pos;
 	t_pos			*pos;
 	t_dir			dir;
+	t_dir			move_dir;
 	struct s_enemy	*next;
 }	t_enemy;
 
@@ -173,6 +175,7 @@ void			update_anim(t_game *game, t_player *player);
 void			interactions(mlx_key_data_t k, void *param);
 void			collect(t_game *game, t_collect **list, t_pos *pos);
 bool			kill(t_enemy **list, t_pos *pos);
+void			move_sprite(t_player *player, t_dir move_dir);
 
 /* update game state */
 bool			take_damage(t_pos *pos, t_enemy **list);

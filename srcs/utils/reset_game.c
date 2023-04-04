@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 16:20:12 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 15:05:41 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 17:06:16 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ void	restart_game(t_game *game)
 	reset_enemies(game->enemies);
 	reset_collectibles(game->collectibles);
 	update_ui(game, game->ui, game->player);
-	end_screen(game, game->ui, "RESTARTING");
-	return ;
+	ft_printf("Restarting...\n");
+
 }

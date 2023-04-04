@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/17 12:50:09 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 14:01:37 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 17:05:45 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	end_screen(t_game *game, t_ui *ui, char *str)
 {
-	const double	time = mlx_get_time();
 	mlx_texture_t	*text;
 
 	text = mlx_load_png("./sprites/end_bg.png");
@@ -26,33 +25,15 @@ void	end_screen(t_game *game, t_ui *ui, char *str)
 	mlx_image_to_window(game->mlx, ui->end, \
 	game->width / 2 - 150, game->height / 2 - 50);
 	ui->end_msg = mlx_put_string(game->mlx, str, \
-	game->width / 2 - 100, game->height / 2 - 25);
-	if (game->status == RESTART)
-	{
-		while (true)
-		{
-			if (mlx_get_time() - time > 2.00)
-				break ;
-		}
-		mlx_delete_image(game->mlx, ui->end_msg);
-		mlx_delete_image(game->mlx, ui->end);
-	}
+	game->width / 2 - 90, game->height / 2 - 25);
 }
-
 
 void	end_game(t_game *game)
 {
-	const double	time = mlx_get_time();
 
-	game->status = LOCKED;
 	if (game->player->status == DEAD)
-		end_screen(game, game->ui, "YOU LOST");
+		ft_printf("You Lost!!\n");
 	else
-		end_screen(game, game->ui, "YOU WON");
-	while (1)
-	{
-		if (mlx_get_time() - time > 5.0)
-			break ;
-	}
+		ft_printf("You Won!!\n");
 	exit_game(game);
 }

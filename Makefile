@@ -7,7 +7,7 @@ CYAN=\033[1;36m
 END=\033[0m
 
 CC = gcc
-CFLAGS =  #-Wall -Werror -Wextra #-g -fsanitize=address
+CFLAGS =  -Wall -Werror -Wextra -Wunused -Wunreachable-code -g #-fsanitize=address
 NAME = so_long
 LIBFT = libft/libft.a
 MLX = MLX42/build/libmlx42.a
@@ -49,10 +49,9 @@ ${MLX}:
 	@make -C MLX42/build -j4
 
 ${NAME}: ${MLX} ${OBJS} ${DIR_I}/${NAME}.h
-
 	@make -s -C libft
 	@echo "${BLUE}Compiling ${NAME}${END}"
-	@${CC} ${CFLAGS} ${FW_FLAGS} ${LIBFT} ${MLX} ${OBJS} -o ${NAME} 
+	@${CC} ${CFLAGS} ${FW_FLAGS} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} 
 	@echo "${GREEN}Done!${END}"
 
 ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
@@ -61,7 +60,6 @@ ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
 	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
 bonus: ${NAME}
-
 
 clean:
 	@make clean -s -C libft 

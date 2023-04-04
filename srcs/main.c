@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:24:33 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 17:25:01 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/04/03 14:45:29 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ void	update_game(void *param)
 	pos = game->player->pos;
 	update_enemy(game->enemies);
 	update_collectible(game->collectibles);
-	collect(game, game->collectibles, game->player->pos);
-	if (game->status != LOCKED)
+	if (game->status == UNLOCKED)
+	{
 		update_player(game->player);
-	else if (mlx_get_time() - time > delay(game->player))
+		collect(game, game->collectibles, game->player->pos);
+	}
+	else if (mlx_get_time() - time > delay(game->player) \
+	&& game->status == LOCKED)
 	{
 		update_anim(game, game->player);
 		time = mlx_get_time();
@@ -48,7 +51,7 @@ void	update_game(void *param)
 
 void	leaks(void)
 {
-	system("leaks -q so_long");
+	system("leaks -q  so_long");
 }
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:38:55 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 18:00:18 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 17:02:26 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,37 +77,41 @@ static bool	dequeue(char **map, t_map *info, int front, int rear)
 		curr = info->queue[front];
 		front++;
 		if (map[curr.y][curr.x] == 'E')
-			return (free(info->visited), free(info->queue), true);
+		{
+			free(info->queue);
+			ft_free_int_arr(info->visited, info->rows);
+			return (true);
+		}
 		if (look_around(map, info, &curr, &rear) == false)
-			return (free(info->visited), free(info->queue), false);
+		{
+			free(info->queue);
+			ft_free_int_arr(info->visited, info->rows);
+			return (false);
+		}
 	}
-	return (free(info->visited), free(info->queue), false);
+	free(info->queue);
+	ft_free_int_arr(info->visited, info->rows);
+	return (false);
 }
 
 bool	can_exit(char **map, t_map *info, t_pos *pos)
 {
-	int32_t		**visited;
 	int32_t		front;
 	int32_t		rear;
-	t_pos		*queue;
 
 	front = 0;
 	rear = 0;
+	info->queue = (t_pos *)ft_calloc(info->size, sizeof(t_pos));
 	if (!info->queue)
-		info->queue = (t_pos *)ft_calloc(info->size, sizeof(t_pos));
-	if (!info->queue)
-		return (free(info->visited), false);
-	queue = info->queue;
-	if (!visited)
-		info->visited = alloc_visited(info);
+		ft_error("so_long", ENOMEM);
+	info->visited = alloc_visited(info);
 	if (!info->visited)
-		return (false);
-	visited = info->visited;
-	ft_memset(visited, 0, sizeof(visited));
-	queue[rear].x = pos->x;
-	queue[rear].y = pos->y;
+		ft_error("so_long", ENOMEM);
+	ft_bzero(info->visited, sizeof(info->visited));
+	info->queue[rear].x = pos->x;
+	info->queue[rear].y = pos->y;
 	rear++;
-	visited[pos->y][pos->x] = true;
+	info->visited[pos->y][pos->x] = true;
 	if (dequeue(map, info, front, rear) == false)
 		return (false);
 	return (true);

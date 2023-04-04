@@ -6,16 +6,15 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 11:21:58 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 15:04:39 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 17:38:06 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 
-static void	move_sprite(t_player *player, t_dir move_dir)
+void	move_sprite(t_player *player, t_dir move_dir)
 {
 	int			step;
-	static int	moved = 0;
 
 	step = 1;
 	if (move_dir == UP || move_dir == LEFT)
@@ -29,9 +28,6 @@ static void	move_sprite(t_player *player, t_dir move_dir)
 	}
 	else if (move_dir == UP || move_dir == DOWN)
 		player->img->instances[0].y += (step * 4);
-	moved += 4;
-	if (moved == 32)
-		moved = 0;
 }
 
 static void	play_anim(t_game *game, t_player *player, uint8_t **arr, int i)
@@ -60,6 +56,7 @@ static void	play_anim(t_game *game, t_player *player, uint8_t **arr, int i)
 			update_ui(game, game->ui, game->player);
 		}
 	}
+	mlx_set_instance_depth(&player->img->instances[0], 5 + player->pos->y);
 }
 
 static void	end_check(t_game *game, t_player *player, int *i)

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 17:06:34 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/04/03 12:37:50 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,23 +90,20 @@ static void	init_pois(t_game *game, char **map)
 
 static void	init_player(t_game *game)
 {
-	t_player	*player;
-
-	player = ft_calloc(1, sizeof(t_player));
-	if (!player)
+	game->player = ft_calloc(1, sizeof(t_player));
+	if (!game->player)
 		ft_error("so_long", ENOMEM);
-	player->start_pos = ft_calloc(1, sizeof(t_pos));
-	if (!player->start_pos)
+	game->player->start_pos = ft_calloc(1, sizeof(t_pos));
+	if (!game->player->start_pos)
 		ft_error("so_long", ENOMEM);
-	player->pos = ft_calloc(1, sizeof(t_pos));
-	if (!player->pos)
+	game->player->pos = ft_calloc(1, sizeof(t_pos));
+	if (!game->player->pos)
 		ft_error("so_long", ENOMEM);
-	player->lives = 3;
-	player->dir = 3;
-	player->move_dir = 3;
-	player->collectibles = 0;
-	player->moves = 0;
-	game->player = player;
+	game->player->lives = 3;
+	game->player->dir = 3;
+	game->player->move_dir = 3;
+	game->player->collectibles = 0;
+	game->player->moves = 0;
 }
 
 void	init_game(t_game *game, char **argv)

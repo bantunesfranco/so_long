@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 14:37:21 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/28 11:35:33 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/30 13:33:28 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	update_enemy(t_enemy **list)
 {
-	static int		iter;
-	static double	time;
+	static int		iter = 0;
+	static double	time = 0;
 	int				dir;
 	t_enemy			*head;
 
@@ -24,7 +24,7 @@ void	update_enemy(t_enemy **list)
 	{
 		while (head)
 		{
-			if (head->dir == 2)
+			if (head->dir == LEFT)
 				dir = 6;
 			else
 				dir = 0;
@@ -90,5 +90,5 @@ void	render_enemies(t_game *game, int x, int y)
 	}
 	mlx_image_to_window(game->mlx, head->img, \
 	SIZE * x + PADX / 8, SIZE * y + PADY / 2 - 20);
-	mlx_set_instance_depth(&head->img->instances[0], 4);
+	mlx_set_instance_depth(&head->img->instances[0], 4 + y);
 }

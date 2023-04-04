@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/20 09:51:07 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 13:47:21 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/03/31 14:44:03 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,9 @@ static void	can_move(t_player *player, t_game *game, int32_t dir)
 
 static void	move(mlx_key_data_t k, void *param)
 {
-	mlx_t			*mlx;
 	t_game			*game;
-	static int		time;
 
 	game = param;
-	mlx = game->mlx;
-	if (!time)
-		time = mlx_get_time();
 	if (game->status != LOCKED)
 	{
 		if ((k.key == MLX_KEY_W || k.key == MLX_KEY_UP) \
@@ -116,12 +111,10 @@ static void	attack(t_game *game)
 
 void	interactions(mlx_key_data_t k, void *param)
 {
-	mlx_t	*mlx;
 	t_game	*game;
 
 	game = param;
-	mlx = game->mlx;
-	if (game->status != LOCKED)
+	if (game->status == UNLOCKED)
 	{
 		if (k.key == MLX_KEY_SPACE && k.action == MLX_PRESS)
 			attack(game);

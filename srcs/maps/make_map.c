@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:24:44 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/29 17:50:35 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/04/03 12:36:46 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ static int	get_nb_lines(char *file)
 	while (line != NULL)
 	{
 		line = get_next_line(fd);
+		free(line);
 		if (!line)
 			break ;
 		lines++;
-		free(line);
 	}
 	if (lines <= 2)
 	{
@@ -77,7 +77,7 @@ static char	**get_map(char *file, t_map *info)
 		ft_error("so_long", errno);
 	line = "";
 	i = -1;
-	map = ft_calloc(sizeof(char *), info->rows + 1);
+	map = ft_calloc(sizeof(char *), info->rows);
 	if (!map)
 		ft_error("so_long", ENOMEM);
 	while (++i < info->rows)
@@ -103,7 +103,7 @@ char	**map_parser(char *file, t_game *game)
 		ft_printf("Invalid map\n");
 		exit(EINVAL);
 	}
-	info = malloc(sizeof(t_map));
+	info = (t_map *)malloc(sizeof(t_map));
 	if (!info)
 		ft_error("so_long", errno);
 	init_info(info);
@@ -111,12 +111,12 @@ char	**map_parser(char *file, t_game *game)
 	map = get_map(file, info);
 	info->cols = (int)ft_strlen(map[0]);
 	info->size = info->rows * info->cols;
-	game->map_info = info;
 	if (validate_map(map, info, game) == false)
 	{
 		ft_printf("Invalid map\n");
 		exit(EINVAL);
 	}
 	ft_printf("Valid map\n");
+	game->map_info = info;
 	return (map);
 }

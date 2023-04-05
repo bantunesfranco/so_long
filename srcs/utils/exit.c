@@ -17,7 +17,7 @@ void	clear_sprites(t_collect **lst, t_enemy **lst2)
 	t_collect	*head;
 	t_enemy		*head2;
 
-	if (*lst2)
+	if (lst && *lst)
 	{
 		head = *lst;
 		while (head)
@@ -27,7 +27,7 @@ void	clear_sprites(t_collect **lst, t_enemy **lst2)
 		}
 		ft_free_int_arr((int **)(*lst)->sprites, 4);
 	}
-	if (*lst2)
+	if (lst2 && *lst2)
 	{
 		head2 = *lst2;
 		while (head2)

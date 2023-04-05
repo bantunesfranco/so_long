@@ -19,6 +19,8 @@ void	update_enemy(t_enemy **list)
 	int				dir;
 	t_enemy			*head;
 
+	if (!list)
+		return ;
 	head = *list;
 	if (mlx_get_time() - time > 0.15)
 	{
@@ -42,6 +44,8 @@ void	update_collectible(t_collect **list)
 	static double	time;
 	t_collect		*head;
 
+	if (!list)
+		return ;
 	head = *list;
 	if (mlx_get_time() - time > 0.15)
 	{
@@ -59,6 +63,8 @@ void	render_collectibles(t_game *game, int x, int y)
 {
 	t_collect		*head;
 
+	if (!game->collectibles)
+		return ;
 	head = *game->collectibles;
 	while (head)
 	{
@@ -78,6 +84,8 @@ void	render_enemies(t_game *game, int x, int y)
 {
 	t_enemy			*head;
 
+	if (!game->enemies)
+		return ;
 	head = *game->enemies;
 	while (head)
 	{

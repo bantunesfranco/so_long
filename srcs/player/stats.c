@@ -55,6 +55,8 @@ bool	take_damage(t_pos *pos, t_enemy **list)
 {
 	t_enemy			*enemy;
 
+	if (!list)
+		return (false);
 	enemy = *list;
 	while (enemy)
 	{

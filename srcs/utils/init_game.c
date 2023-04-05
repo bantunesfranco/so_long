@@ -17,6 +17,8 @@ static void	add_collect(mlx_t *mlx, t_collect **list, \
 {
 	t_collect			*collect;
 
+	if (!list)
+		return ;
 	collect = ft_calloc(1, sizeof(t_collect));
 	if (!collect)
 		ft_error("so_long", ENOMEM);
@@ -41,6 +43,8 @@ static void	add_enemy(mlx_t *mlx, t_enemy **list, \
 {
 	t_enemy			*enemy;
 
+	if (!list)
+		return ;
 	enemy = ft_calloc(1, sizeof(t_enemy));
 	if (!enemy)
 		ft_error("so_long", ENOMEM);
@@ -70,7 +74,7 @@ static void	init_pois(t_game *game, char **map)
 	uint8_t			**sprites2;
 
 	sprites = load_poi_anim(mlx_load_png("./sprites/coin.png"), 4, 0, 'C');
-	if (game->map_info->enemy_count)
+	if (game->map_info->enemy_count > 0)
 		sprites2 = load_poi_anim(mlx_load_png("./sprites/ghost48.png"), \
 		12, 0, 'K');
 	if (!sprites || !sprites2)
@@ -119,8 +123,11 @@ void	init_game(t_game *game, char **argv)
 	if (!game->mlx)
 		exit(EXIT_FAILURE);
 	game->collectibles = ft_calloc(1, sizeof(t_collect *));
-	game->enemies = ft_calloc(1, sizeof(t_enemy *));
-	if (!game->collectibles || !game->enemies)
+	if (!game->collectibles)
+		ft_error("so_long", ENOMEM);
+	if (game->map_info->enemy_count > 0)
+		game->enemies = ft_calloc(1, sizeof(t_enemy *));
+	if (!game->enemies && game->map_info->enemy_count > 0)
 		ft_error("so_long", ENOMEM);
 	game->player->img = mlx_new_image(game->mlx, 48, 48);
 	free(game->player->img->pixels);

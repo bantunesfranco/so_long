@@ -7,7 +7,7 @@ CYAN=\033[1;36m
 END=\033[0m
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=leak
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 NAME = so_long
 LIBFT = libft/libft.a
 MLX = MLX42/build/libmlx42.a

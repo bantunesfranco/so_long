@@ -83,7 +83,10 @@ static bool	get_contents(char **map, t_map *info, t_player *player)
 			else if (map[pos.y][pos.x] == 'C')
 				info->collectible_count++;
 			else if (map[pos.y][pos.x] == 'K')
+			{
 				info->enemy_count++;
+				ft_printf("%d\n", info->enemy_count);
+			}
 		}
 	}
 	return (true);

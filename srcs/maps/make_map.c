@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 09:24:44 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/04/03 12:36:46 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/04/05 11:43:56 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	init_info(t_map *info)
 	info->player_count = 0;
 	info->exit_count = 0;
 	info->collectible_count = 0;
+	info->enemy_count = 0;
 	info->visited = NULL;
 	info->queue = NULL;
 }

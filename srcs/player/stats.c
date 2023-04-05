@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 14:15:20 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/31 16:39:32 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/04/05 15:34:39 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	collect(t_game *game, t_collect **list, t_pos *pos)
 {
 	t_collect	*collect;
 
+	if (!list)
+		return ;
 	collect = *list;
 	while (collect)
 	{
@@ -36,6 +38,8 @@ bool	kill(t_enemy **list, t_pos *pos)
 {
 	t_enemy	*enemy;
 
+	if (!list)
+		return (false);
 	enemy = *list;
 	while (enemy)
 	{

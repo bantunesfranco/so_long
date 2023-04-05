@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 09:17:48 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/04/05 11:40:35 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/04/05 15:41:51 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void	init_game(t_game *game, char **argv)
 	game->collectibles = ft_calloc(1, sizeof(t_collect *));
 	if (!game->collectibles)
 		ft_error("so_long", ENOMEM);
+	game->enemies = NULL;
 	if (game->map_info->enemy_count > 0)
 		game->enemies = ft_calloc(1, sizeof(t_enemy *));
 	if (!game->enemies && game->map_info->enemy_count > 0)
@@ -134,7 +135,6 @@ void	init_game(t_game *game, char **argv)
 	init_pois(game, game->map);
 	game->status = UNLOCKED;
 	game->exit_status = false;
-	game->time = 0;
 	game->ui = ft_calloc(1, sizeof(t_ui));
 	if (!game->ui)
 		ft_error("so_long", ENOMEM);

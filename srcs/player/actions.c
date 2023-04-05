@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/20 09:51:07 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/31 14:44:03 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/04/05 15:42:50 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,16 @@ static void	move(mlx_key_data_t k, void *param)
 	if (game->status != LOCKED)
 	{
 		if ((k.key == MLX_KEY_W || k.key == MLX_KEY_UP) \
-		&& k.action == MLX_PRESS)
+		&& (k.action == MLX_PRESS || k.action == MLX_REPEAT))
 			can_move(game->player, game, UP);
 		else if ((k.key == MLX_KEY_S || k.key == MLX_KEY_DOWN) \
-		&& k.action == MLX_PRESS)
+		&& (k.action == MLX_PRESS || k.action == MLX_REPEAT))
 			can_move(game->player, game, DOWN);
 		else if ((k.key == MLX_KEY_A || k.key == MLX_KEY_LEFT) \
-		&& k.action == MLX_PRESS)
+		&& (k.action == MLX_PRESS || k.action == MLX_REPEAT))
 			can_move(game->player, game, LEFT);
 		else if ((k.key == MLX_KEY_D || k.key == MLX_KEY_RIGHT) \
-		&& k.action == MLX_PRESS)
+		&& (k.action == MLX_PRESS || k.action == MLX_REPEAT))
 			can_move(game->player, game, RIGHT);
 	}
 }

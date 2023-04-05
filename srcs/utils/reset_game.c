@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 16:20:12 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/03/31 17:06:16 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/04/05 15:35:17 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	reset_enemies(t_enemy **list)
 	mlx_image_t		*img;
 	t_enemy			*head;
 
+	if (!list)
+		return ;
 	head = *list;
 	while (head)
 	{
@@ -58,6 +60,8 @@ static void	reset_collectibles(t_collect **list)
 	mlx_image_t		*img;
 	t_collect		*head;
 
+	if (!list)
+		return ;
 	head = *list;
 	while (head)
 	{

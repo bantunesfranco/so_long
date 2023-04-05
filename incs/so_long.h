@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/08 13:25:13 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/04/05 15:36:03 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/04/05 15:51:09 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Use: ./so_long [path_to_map]"
 # define CMDS "Arrow keys or WASD to move\n\
 R to restart\n\
 SPACE to attack\n\
-ESC to exit game"
+ESC to exit game\n"
 
 typedef enum e_status
 {

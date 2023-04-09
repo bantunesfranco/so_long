@@ -33,11 +33,9 @@ void	update_game(void *param)
 	game = param;
 	update_enemy(game->enemies);
 	update_collectible(game->collectibles);
+	collect(game, game->collectibles, game->player->pos);
 	if (game->status == UNLOCKED)
-	{
 		update_player(game->player);
-		collect(game, game->collectibles, game->player->pos);
-	}
 	else if (mlx_get_time() - time > delay(game->player) \
 	&& game->status == LOCKED)
 	{
@@ -56,8 +54,8 @@ int	main(int argc, char **argv)
 		ft_putendl_fd(ARG, 2);
 		exit(EXIT_FAILURE);
 	}
-	ft_printf("%s\n", CMDS);
 	init_game(&game, argv);
+	ft_printf("\n%s\n", CMDS);
 	render_map(&game, game.map);
 	render_ui(&game, game.ui, game.player);
 	mlx_loop_hook(game.mlx, update_game, &game);
